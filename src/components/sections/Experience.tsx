@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Experience as ExperienceType } from '@/types';
+import TextAnimation, { CharacterSplit } from '@/components/ui/TextAnimation';
 
 interface ExperienceProps {
   experiences: ExperienceType[];
@@ -79,12 +80,29 @@ export default function Experience({ experiences }: ExperienceProps) {
                     {/* Header */}
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
                       <div>
-                        <h3 className="text-xl font-bold text-gray-900 mb-1">
-                          {experience.position}
-                        </h3>
-                        <p className="text-lg text-blue-600 font-medium">
+                        <motion.h3
+                          initial={{ opacity: 0, x: -30 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.6, delay: 0.1 }}
+                          viewport={{ once: true }}
+                          className="text-xl font-bold text-gray-900 mb-1"
+                        >
+                          <CharacterSplit
+                            text={experience.position}
+                            direction="left"
+                            stagger={0.03}
+                            delay={0.2}
+                          />
+                        </motion.h3>
+                        <motion.p
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.6, delay: 0.3 }}
+                          viewport={{ once: true }}
+                          className="text-lg text-blue-600 font-medium"
+                        >
                           {experience.company}
-                        </p>
+                        </motion.p>
                       </div>
                       <div className="mt-2 sm:mt-0">
                         <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
@@ -104,9 +122,21 @@ export default function Experience({ experiences }: ExperienceProps) {
                     </div>
 
                     {/* Description */}
-                    <p className="text-gray-700 mb-4 leading-relaxed">
-                      {experience.description}
-                    </p>
+                    <motion.p
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.4 }}
+                      viewport={{ once: true }}
+                      className="text-gray-700 mb-4 leading-relaxed"
+                    >
+                      <TextAnimation
+                        text={experience.description}
+                        type="split"
+                        className="inline"
+                        delay={0.5}
+                        stagger={0.02}
+                      />
+                    </motion.p>
 
                     {/* Technologies */}
                     <div className="mb-4">
@@ -115,12 +145,16 @@ export default function Experience({ experiences }: ExperienceProps) {
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {experience.technologies.map((tech, techIndex) => (
-                          <span
+                          <motion.span
                             key={techIndex}
-                            className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium"
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.4, delay: 0.5 + techIndex * 0.1 }}
+                            viewport={{ once: true }}
+                            className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-blue-100 hover:text-blue-800 transition-colors duration-200"
                           >
                             {tech}
-                          </span>
+                          </motion.span>
                         ))}
                       </div>
                     </div>
@@ -133,13 +167,23 @@ export default function Experience({ experiences }: ExperienceProps) {
                         </h4>
                         <ul className="space-y-1">
                           {experience.achievements.map((achievement, achievementIndex) => (
-                            <li
+                            <motion.li
                               key={achievementIndex}
+                              initial={{ opacity: 0, x: -20 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              transition={{ duration: 0.5, delay: 0.6 + achievementIndex * 0.1 }}
+                              viewport={{ once: true }}
                               className="text-gray-700 text-sm flex items-start"
                             >
-                              <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0" />
+                              <motion.span
+                                initial={{ scale: 0 }}
+                                whileInView={{ scale: 1 }}
+                                transition={{ duration: 0.3, delay: 0.7 + achievementIndex * 0.1 }}
+                                viewport={{ once: true }}
+                                className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"
+                              />
                               {achievement}
-                            </li>
+                            </motion.li>
                           ))}
                         </ul>
                       </div>

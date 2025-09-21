@@ -9,6 +9,7 @@ import {
   LinkIcon,
 } from '@heroicons/react/24/outline';
 import { Project, ProjectCategory } from '@/types';
+import { CharacterSplit } from '@/components/ui/TextAnimation';
 
 interface PortfolioProps {
   projects: Project[];
@@ -105,12 +106,23 @@ const getImageSrc = (project: Project) => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Portfolio
+            <CharacterSplit
+              text="Portfolio"
+              direction="up"
+              stagger={0.08}
+              delay={0.2}
+            />
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            viewport={{ once: true }}
+            className="text-lg text-gray-600 max-w-2xl mx-auto"
+          >
             A showcase of my recent projects, featuring web applications, games,
             and interactive experiences I've built.
-          </p>
+          </motion.p>
         </motion.div>
 
         {/* Category Filter */}
@@ -274,38 +286,72 @@ const getImageSrc = (project: Project) => {
 
               {/* Project Content */}
               <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-200">
+                <motion.h3
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  viewport={{ once: true }}
+                  className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-200"
+                >
                   {project.title}
-                </h3>
-                <p className="text-gray-600 mb-4 line-clamp-3">
+                </motion.h3>
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  viewport={{ once: true }}
+                  className="text-gray-600 mb-4 line-clamp-3"
+                >
                   {project.description}
-                </p>
+                </motion.p>
 
                 {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-4">
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  viewport={{ once: true }}
+                  className="flex flex-wrap gap-2 mb-4"
+                >
                   {project.technologies.slice(0, 3).map((tech, index) => (
-                    <span
+                    <motion.span
                       key={index}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3, delay: 0.4 + index * 0.1 }}
+                      viewport={{ once: true }}
                       className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium"
                     >
                       {tech}
-                    </span>
+                    </motion.span>
                   ))}
                   {project.technologies.length > 3 && (
-                    <span className="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs font-medium">
+                    <motion.span
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3, delay: 0.7 }}
+                      viewport={{ once: true }}
+                      className="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs font-medium"
+                    >
                       +{project.technologies.length - 3} more
-                    </span>
+                    </motion.span>
                   )}
-                </div>
+                </motion.div>
 
                 {/* Date */}
-                <div className="flex items-center text-gray-500 text-sm">
+                <motion.div
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                  viewport={{ once: true }}
+                  className="flex items-center text-gray-500 text-sm"
+                >
                   <CalendarIcon className="w-4 h-4 mr-1" />
                   <span>
                     {formatDate(project.startDate)}
                     {project.endDate && ` - ${formatDate(project.endDate)}`}
                   </span>
-                </div>
+                </motion.div>
               </div>
             </motion.div>
           ))}
@@ -331,19 +377,32 @@ const getImageSrc = (project: Project) => {
                 <div className="p-8">
                   <div className="flex justify-between items-start mb-6">
                     <div>
-                      <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                      <motion.h2
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="text-3xl font-bold text-gray-900 mb-2"
+                      >
                         {selectedProject.title}
-                      </h2>
-                      <p className="text-gray-600">
+                      </motion.h2>
+                      <motion.p
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                        className="text-gray-600"
+                      >
                         {selectedProject.longDescription || selectedProject.description}
-                      </p>
+                      </motion.p>
                     </div>
-                    <button
+                    <motion.button
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3 }}
                       onClick={() => setSelectedProject(null)}
                       className="text-gray-400 hover:text-gray-600 transition-colors duration-200"
                     >
                       <span className="text-2xl">×</span>
-                    </button>
+                    </motion.button>
                   </div>
 
                   {/* Project Details */}
@@ -353,25 +412,37 @@ const getImageSrc = (project: Project) => {
                         Project Details
                       </h3>
                       <div className="space-y-3">
-                        <div>
+                        <motion.div
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.4, delay: 0.2 }}
+                        >
                           <span className="font-medium text-gray-700">Status:</span>
                           <span className={`ml-2 px-2 py-1 rounded-full text-sm font-medium ${getStatusColor(selectedProject.status)}`}>
                             {selectedProject.status}
                           </span>
-                        </div>
-                        <div>
+                        </motion.div>
+                        <motion.div
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.4, delay: 0.3 }}
+                        >
                           <span className="font-medium text-gray-700">Category:</span>
                           <span className="ml-2 text-gray-600 capitalize">
                             {selectedProject.category}
                           </span>
-                        </div>
-                        <div>
+                        </motion.div>
+                        <motion.div
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.4, delay: 0.4 }}
+                        >
                           <span className="font-medium text-gray-700">Duration:</span>
                           <span className="ml-2 text-gray-600">
                             {formatDate(selectedProject.startDate)}
                             {selectedProject.endDate && ` - ${formatDate(selectedProject.endDate)}`}
                           </span>
-                        </div>
+                        </motion.div>
                       </div>
                     </div>
 
@@ -394,54 +465,76 @@ const getImageSrc = (project: Project) => {
 
                   {/* Highlights */}
                   {selectedProject.highlights.length > 0 && (
-                    <div className="mt-8">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.5 }}
+                      className="mt-8"
+                    >
                       <h3 className="text-lg font-semibold text-gray-900 mb-4">
                         Key Highlights
                       </h3>
                       <ul className="space-y-2">
                         {selectedProject.highlights.map((highlight, index) => (
-                          <li key={index} className="flex items-start text-gray-700">
+                          <motion.li
+                            key={index}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
+                            className="flex items-start text-gray-700"
+                          >
                             <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0" />
                             {highlight}
-                          </li>
+                          </motion.li>
                         ))}
                       </ul>
-                    </div>
+                    </motion.div>
                   )}
 
                   {/* Action Buttons */}
-                  <div className="mt-8 flex flex-wrap gap-4">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.7 }}
+                    className="mt-8 flex flex-wrap gap-4"
+                  >
                     {selectedProject.demoUrl && (
-                      <a
+                      <motion.a
                         href={selectedProject.demoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors duration-200"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                       >
                         View Demo
-                      </a>
+                      </motion.a>
                     )}
                     {selectedProject.githubUrl && (
-                      <a
+                      <motion.a
                         href={selectedProject.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-medium hover:border-blue-500 hover:text-blue-600 transition-colors duration-200"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                       >
                         View Code
-                      </a>
+                      </motion.a>
                     )}
                     {selectedProject.liveUrl && (
-                      <a
+                      <motion.a
                         href={selectedProject.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors duration-200"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                       >
                         Live Site
-                      </a>
+                      </motion.a>
                     )}
-                  </div>
+                  </motion.div>
                 </div>
               </motion.div>
             </motion.div>

@@ -10,6 +10,7 @@ import {
   WrenchIcon,
 } from '@heroicons/react/24/outline';
 import { Skill, SkillCategory } from '@/types';
+import TextAnimation, { CharacterSplit } from '@/components/ui/TextAnimation';
 
 interface SkillsProps {
   skills: Skill[];
@@ -112,9 +113,14 @@ export default function Skills({ skills }: SkillsProps) {
 
                 <motion.h3
                   variants={itemVariants}
-                  className="text-xl font-semibold text-gray-900 mb-4 capitalize"
+                  className="text-xl font-semibold text-gray-900 mb-4"
                 >
-                  {category}
+                  <CharacterSplit
+                    text={category}
+                    direction="up"
+                    stagger={0.05}
+                    delay={0.2}
+                  />
                 </motion.h3>
 
                 <div className="space-y-3">
@@ -125,13 +131,23 @@ export default function Skills({ skills }: SkillsProps) {
                       className="flex items-center justify-between"
                     >
                       <div className="flex items-center flex-1">
-                        <span className="text-gray-700 font-medium">
-                          {skill.name}
-                        </span>
+                        <CharacterSplit
+                          text={skill.name}
+                          direction="left"
+                          stagger={0.03}
+                          delay={0.1}
+                          className="text-gray-700 font-medium"
+                        />
                         {skill.icon && (
-                          <span className="ml-2 text-gray-500">
+                          <motion.span
+                            initial={{ opacity: 0, scale: 0 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.3, delay: 0.3 }}
+                            viewport={{ once: true }}
+                            className="ml-2 text-gray-500"
+                          >
                             {skill.icon}
-                          </span>
+                          </motion.span>
                         )}
                       </div>
                       <span
@@ -157,13 +173,23 @@ export default function Skills({ skills }: SkillsProps) {
         >
           <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-8">
             <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              Always Learning
+              <TextAnimation
+                text="Always Learning"
+                type="typewriter"
+                className="inline-block"
+              />
             </h3>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 2 }}
+              viewport={{ once: true }}
+              className="text-gray-600 max-w-2xl mx-auto"
+            >
               Technology evolves rapidly, and I'm committed to continuous learning.
               I regularly explore new frameworks, tools, and best practices to stay
               current and deliver cutting-edge solutions.
-            </p>
+            </motion.p>
           </div>
         </motion.div>
       </div>

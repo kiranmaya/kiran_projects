@@ -2,12 +2,12 @@
 
 import { motion } from 'framer-motion';
 import {
-  ArrowDownIcon,
   EnvelopeIcon,
   MapPinIcon,
   PhoneIcon,
 } from '@heroicons/react/24/outline';
 import { PersonalInfo as PersonalInfoType } from '@/types';
+import TextAnimation, { CharacterSplit } from '@/components/ui/TextAnimation';
 
 interface PersonalInfoProps {
   data: PersonalInfoType;
@@ -65,43 +65,113 @@ export default function PersonalInfo({ data }: PersonalInfoProps) {
           {/* Main Content */}
           <motion.div variants={itemVariants} className="mb-8">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
-              Hi, I'm{' '}
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                {data.name}
-              </span>
+              <CharacterSplit
+                text="Hi, I'm  "
+                direction="up"
+                stagger={0.05}
+                delay={0.2}
+                className="block sm:inline"
+              />
+              <CharacterSplit
+                text={data.name}
+                direction="up"
+                stagger={0.08}
+                delay={0.8}
+                className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent block sm:inline"
+              />
             </h1>
-            <p className="text-xl sm:text-2xl text-gray-600 mb-6">
-              {data.title}
-            </p>
-            <p className="text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed">
-              {data.bio}
-            </p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.5 }}
+              viewport={{ once: true }}
+              className="text-xl sm:text-2xl text-gray-600 mb-6"
+            >
+              <CharacterSplit
+                text={data.title}
+                direction="up"
+                stagger={0.03}
+                delay={1.6}
+              />
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.8 }}
+              viewport={{ once: true }}
+              className="text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed"
+            >
+              <TextAnimation
+                text={data.bio}
+                type="split"
+                className="inline"
+                delay={1.9}
+                stagger={0.02}
+              />
+            </motion.p>
           </motion.div>
 
           {/* Contact Information */}
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12">
-            <div className="flex items-center text-gray-600">
-              <MapPinIcon className="w-5 h-5 mr-2 text-blue-500" />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 2.2 }}
+              viewport={{ once: true }}
+              className="flex items-center text-gray-600"
+            >
+              <motion.div
+                whileHover={{ scale: 1.2, rotate: 5 }}
+                transition={{ duration: 0.2 }}
+              >
+                <MapPinIcon className="w-5 h-5 mr-2 text-blue-500" />
+              </motion.div>
               <span>{data.location}</span>
-            </div>
-            <div className="flex items-center text-gray-600">
-              <EnvelopeIcon className="w-5 h-5 mr-2 text-blue-500" />
-              <a
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 2.4 }}
+              viewport={{ once: true }}
+              className="flex items-center text-gray-600"
+            >
+              <motion.div
+                whileHover={{ scale: 1.2, rotate: 5 }}
+                transition={{ duration: 0.2 }}
+              >
+                <EnvelopeIcon className="w-5 h-5 mr-2 text-blue-500" />
+              </motion.div>
+              <motion.a
                 href={`mailto:${data.email}`}
                 className="hover:text-blue-600 transition-colors duration-200"
+                whileHover={{ x: 3 }}
+                transition={{ duration: 0.2 }}
               >
                 {data.email}
-              </a>
-            </div>
-            <div className="flex items-center text-gray-600">
-              <PhoneIcon className="w-5 h-5 mr-2 text-blue-500" />
-              <a
+              </motion.a>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 2.6 }}
+              viewport={{ once: true }}
+              className="flex items-center text-gray-600"
+            >
+              <motion.div
+                whileHover={{ scale: 1.2, rotate: 5 }}
+                transition={{ duration: 0.2 }}
+              >
+                <PhoneIcon className="w-5 h-5 mr-2 text-blue-500" />
+              </motion.div>
+              <motion.a
                 href={`tel:${data.phone}`}
                 className="hover:text-blue-600 transition-colors duration-200"
+                whileHover={{ x: 3 }}
+                transition={{ duration: 0.2 }}
               >
                 {data.phone}
-              </a>
-            </div>
+              </motion.a>
+            </motion.div>
           </motion.div>
 
           {/* Social Links */}
@@ -128,22 +198,34 @@ export default function PersonalInfo({ data }: PersonalInfoProps) {
                 const element = document.querySelector('#portfolio');
                 element?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium shadow-lg hover:shadow-xl transition-all duration-200"
+              className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium shadow-lg hover:shadow-xl transition-all duration-200 overflow-hidden relative"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              View My Work
+              <motion.span
+                className="inline-block"
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.2 }}
+              >
+                View My Work
+              </motion.span>
             </motion.button>
             <motion.button
               onClick={() => {
                 const element = document.querySelector('#contact');
                 element?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="px-8 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-medium hover:border-blue-500 hover:text-blue-600 transition-all duration-200"
+              className="px-8 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-medium hover:border-blue-500 hover:text-blue-600 transition-all duration-200 overflow-hidden relative"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Get In Touch
+              <motion.span
+                className="inline-block"
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.2 }}
+              >
+                Get In Touch
+              </motion.span>
             </motion.button>
           </motion.div>
 

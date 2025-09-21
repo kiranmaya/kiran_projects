@@ -10,6 +10,7 @@ import {
   PhoneIcon,
 } from '@heroicons/react/24/outline';
 import { ContactForm as ContactFormType } from '@/types';
+import { CharacterSplit } from '@/components/ui/TextAnimation';
 
 interface ContactProps {
   personalInfo: {
@@ -124,13 +125,21 @@ export default function Contact({ personalInfo }: ContactProps) {
                     <EnvelopeIcon className="w-6 h-6 text-blue-600" />
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-900">Email</h4>
-                    <a
+                    <CharacterSplit
+                      text="Email"
+                      direction="left"
+                      stagger={0.05}
+                      delay={0.1}
+                      className="font-medium text-gray-900"
+                    />
+                    <motion.a
                       href={`mailto:${personalInfo.email}`}
-                      className="text-gray-600 hover:text-blue-600 transition-colors duration-200"
+                      className="text-gray-600 hover:text-blue-600 transition-colors duration-200 block mt-1"
+                      whileHover={{ x: 5 }}
+                      transition={{ duration: 0.2 }}
                     >
                       {personalInfo.email}
-                    </a>
+                    </motion.a>
                   </div>
                 </motion.div>
 
@@ -142,13 +151,21 @@ export default function Contact({ personalInfo }: ContactProps) {
                     <PhoneIcon className="w-6 h-6 text-green-600" />
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-900">Phone</h4>
-                    <a
+                    <CharacterSplit
+                      text="Phone"
+                      direction="left"
+                      stagger={0.05}
+                      delay={0.2}
+                      className="font-medium text-gray-900"
+                    />
+                    <motion.a
                       href={`tel:${personalInfo.phone}`}
-                      className="text-gray-600 hover:text-green-600 transition-colors duration-200"
+                      className="text-gray-600 hover:text-green-600 transition-colors duration-200 block mt-1"
+                      whileHover={{ x: 5 }}
+                      transition={{ duration: 0.2 }}
                     >
                       {personalInfo.phone}
-                    </a>
+                    </motion.a>
                   </div>
                 </motion.div>
 
@@ -160,8 +177,20 @@ export default function Contact({ personalInfo }: ContactProps) {
                     <MapPinIcon className="w-6 h-6 text-purple-600" />
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-900">Location</h4>
-                    <p className="text-gray-600">{personalInfo.location}</p>
+                    <CharacterSplit
+                      text="Location"
+                      direction="left"
+                      stagger={0.05}
+                      delay={0.3}
+                      className="font-medium text-gray-900"
+                    />
+                    <motion.p
+                      className="text-gray-600 mt-1"
+                      whileHover={{ x: 5 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {personalInfo.location}
+                    </motion.p>
                   </div>
                 </motion.div>
               </div>
@@ -207,7 +236,12 @@ export default function Contact({ personalInfo }: ContactProps) {
                     >
                       <CheckCircleIcon className="w-16 h-16 text-green-500 mx-auto mb-4" />
                       <h4 className="text-xl font-semibold text-gray-900 mb-2">
-                        Message Sent!
+                        <CharacterSplit
+                          text="Message Sent!"
+                          direction="up"
+                          stagger={0.1}
+                          delay={0.2}
+                        />
                       </h4>
                       <p className="text-gray-600">
                         Thank you for reaching out. I'll get back to you soon!
@@ -226,9 +260,14 @@ export default function Contact({ personalInfo }: ContactProps) {
                         <div>
                           <label
                             htmlFor="name"
-                            className="block text-sm font-medium text-gray-700 mb-2"
+                            className="block text-sm font-medium text-gray-700 mb-2 transition-all duration-200"
                           >
-                            Name *
+                            <CharacterSplit
+                              text="Name *"
+                              direction="up"
+                              stagger={0.02}
+                              className="hover:text-blue-600 transition-colors duration-200"
+                            />
                           </label>
                           <input
                             type="text"
@@ -244,9 +283,14 @@ export default function Contact({ personalInfo }: ContactProps) {
                         <div>
                           <label
                             htmlFor="email"
-                            className="block text-sm font-medium text-gray-700 mb-2"
+                            className="block text-sm font-medium text-gray-700 mb-2 transition-all duration-200"
                           >
-                            Email *
+                            <CharacterSplit
+                              text="Email *"
+                              direction="up"
+                              stagger={0.02}
+                              className="hover:text-blue-600 transition-colors duration-200"
+                            />
                           </label>
                           <input
                             type="email"
@@ -264,9 +308,14 @@ export default function Contact({ personalInfo }: ContactProps) {
                       <div>
                         <label
                           htmlFor="subject"
-                          className="block text-sm font-medium text-gray-700 mb-2"
+                          className="block text-sm font-medium text-gray-700 mb-2 transition-all duration-200"
                         >
-                          Subject *
+                          <CharacterSplit
+                            text="Subject *"
+                            direction="up"
+                            stagger={0.02}
+                            className="hover:text-blue-600 transition-colors duration-200"
+                          />
                         </label>
                         <input
                           type="text"
@@ -283,9 +332,14 @@ export default function Contact({ personalInfo }: ContactProps) {
                       <div>
                         <label
                           htmlFor="message"
-                          className="block text-sm font-medium text-gray-700 mb-2"
+                          className="block text-sm font-medium text-gray-700 mb-2 transition-all duration-200"
                         >
-                          Message *
+                          <CharacterSplit
+                            text="Message *"
+                            direction="up"
+                            stagger={0.02}
+                            className="hover:text-blue-600 transition-colors duration-200"
+                          />
                         </label>
                         <textarea
                           id="message"

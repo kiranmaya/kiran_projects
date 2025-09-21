@@ -1,0 +1,23 @@
+// Import components
+import { 
+  Typewriter, 
+  ScaleFade, 
+  ParticleExplosion,
+  AnimationExample 
+} from '@/components/ui/animations';
+
+// Text animation
+<Typewriter text="Hello World!" delay={100} />
+
+// Container animation  
+<ScaleFade direction="up" intensity="medium">
+  <div>Your content here</div>
+</ScaleFade>
+
+// Advanced animation
+<ParticleExplosion particleCount={15} colors={['#ff6b6b', '#4ecdc4']}>
+  <button>Click me!</button>
+</ParticleExplosion>
+
+// Demo component
+<AnimationExample />

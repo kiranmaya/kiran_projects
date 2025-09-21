@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import Image from 'next/image';
 import {
   CalendarIcon,
   CodeBracketIcon,
@@ -121,7 +122,7 @@ const getImageSrc = (project: Project) => {
             className="text-lg text-gray-600 max-w-2xl mx-auto"
           >
             A showcase of my recent projects, featuring web applications, games,
-            and interactive experiences I've built.
+            and interactive experiences I&apos;ve built.
           </motion.p>
         </motion.div>
 
@@ -137,15 +138,6 @@ const getImageSrc = (project: Project) => {
             <button
               key={filter.value}
               onClick={() => {
-                console.log('Filter button clicked:', filter.value);
-                console.log('Available projects by category:');
-                if (projects) {
-                  const categoryCount = projects.reduce((acc, project) => {
-                    acc[project.category] = (acc[project.category] || 0) + 1;
-                    return acc;
-                  }, {} as Record<string, number>);
-                  console.log('Category counts:', categoryCount);
-                }
                 setSelectedCategory(filter.value);
               }}
               className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
@@ -179,56 +171,24 @@ const getImageSrc = (project: Project) => {
                
                
                 <div className="aspect-video bg-gray-100 overflow-hidden relative">
-                  <img
+                  <Image
                     src={getImageSrc(project)}
                     alt={project.title}
+                    width={400}
+                    height={225}
                     className="w-full h-full object-cover bg-transparent block relative z-10"
                     onLoad={(e) => {
                       const target = e.currentTarget as HTMLImageElement;
-                      console.log(
-                        `Image loaded for project ${project.id}:`,
-                        target.src,
-                        'naturalWidth:',
-                        target.naturalWidth,
-                        'naturalHeight:',
-                        target.naturalHeight,
-                        'computed display:',
-                        window.getComputedStyle(target).display,
-                        'computed opacity:',
-                        window.getComputedStyle(target).opacity
-                      );
                       if (target.naturalWidth === 0 || target.naturalHeight === 0) {
-                        console.warn(`Image for project ${project.id} has zero natural size`, target.src);
+                        // Image has zero natural size - could be a broken image
                       }
-                      // Check if image becomes dark after 100ms
-                      setTimeout(() => {
-                        const computedStyle = window.getComputedStyle(target);
-                        console.log(
-                          `Image ${project.id} after 100ms - opacity:`,
-                          computedStyle.opacity,
-                          'filter:',
-                          computedStyle.filter,
-                          'background-color:',
-                          computedStyle.backgroundColor
-                        );
-                      }, 100);
                     }}
-                    onError={async (e) => {
+                    onError={(e) => {
                       const target = e.currentTarget as HTMLImageElement;
-                      console.error(`Image failed for project ${project.id}:`, target.src);
                       // Try fallback (profile) once
                       if (!target.dataset.fallback) {
                         target.dataset.fallback = '1';
                         target.src = '/images/kiranphoto.jpg';
-                        console.info(`Falling back to /images/kiranphoto.jpg for project ${project.id}`);
-                      } else {
-                        // Best-effort probe of the resource to capture HTTP status (may be blocked by CORS)
-                        try {
-                          const resp = await fetch(target.src, { method: 'HEAD' });
-                          console.info(`HEAD ${target.src} status:`, resp.status);
-                        } catch (err) {
-                          console.warn('Fetch probe failed for', target.src, err);
-                        }
                       }
                     }}
                   />

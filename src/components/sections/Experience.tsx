@@ -50,7 +50,7 @@ export default function Experience({ experiences }: ExperienceProps) {
             Work Experience
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            My professional journey and the valuable experiences I've gained
+            My professional journey and the valuable experiences I&apos;ve gained
             throughout my career.
           </p>
         </motion.div>
@@ -66,7 +66,7 @@ export default function Experience({ experiences }: ExperienceProps) {
             {/* Timeline line */}
             <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-purple-500 hidden md:block" />
 
-            {experiences.map((experience, index) => (
+            {experiences.map((experience, _index) => (
               <motion.div
                 key={experience.id}
                 variants={itemVariants}
@@ -208,7 +208,7 @@ export default function Experience({ experiences }: ExperienceProps) {
               Career Highlights
             </h3>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Throughout my career, I've had the opportunity to work on diverse projects,
+              Throughout my career, I&apos;ve had the opportunity to work on diverse projects,
               collaborate with talented teams, and continuously grow both technically and
               professionally. Each role has contributed to my expertise and passion for
               creating exceptional digital experiences.

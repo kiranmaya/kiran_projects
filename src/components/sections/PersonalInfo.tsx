@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import {
   EnvelopeIcon,
   MapPinIcon,
@@ -48,9 +49,11 @@ export default function PersonalInfo({ data }: PersonalInfoProps) {
             <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 p-1">
               <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
                 {data.avatar ? (
-                  <img
+                  <Image
                     src={data.avatar}
                     alt={`${data.name} avatar`}
+                    width={128}
+                    height={128}
                     className="w-full h-full object-cover"
                   />
                 ) : (

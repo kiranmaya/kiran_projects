@@ -1,7 +1,8 @@
 'use client';
-
-import { motion, Variants } from 'framer-motion';
-import { useEffect, useState } from 'react';
+ 
+import { motion, useInView, useReducedMotion, Variants } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import type { CSSProperties } from 'react';
 
 interface TextAnimationProps {
   text: string;
@@ -80,12 +81,14 @@ export default function TextAnimation({
     };
 
     return (
-      <motion.div
+      // Use a span so "split" can be safely used inline (e.g., inside <p>) without producing invalid HTML.
+      <motion.span
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
         className={className}
+        style={{ display: 'inline-block' }}
       >
         {words.map((word, index) => (
           <motion.span
@@ -96,7 +99,7 @@ export default function TextAnimation({
             {word}
           </motion.span>
         ))}
-      </motion.div>
+      </motion.span>
     );
   }
 
@@ -146,6 +149,10 @@ export default function TextAnimation({
 }
 
 // Character splitting component for more granular control
+// Improvements:
+// - Respect prefers-reduced-motion using useReducedMotion
+// - Use useInView with an explicit ref for more reliable in-view detection on mobile
+// - Ensure each character wrapper uses inline-block styles and performance hints to work well on mobile
 interface CharacterSplitProps {
   text: string;
   className?: string;
@@ -161,6 +168,16 @@ export function CharacterSplit({
   stagger = 0.05,
   direction = 'up'
 }: CharacterSplitProps) {
+  // respect user's reduced motion preference
+  const shouldReduceMotion = useReducedMotion();
+  const containerRef = useRef<HTMLSpanElement | null>(null);
+  const inView = useInView(containerRef, { once: true, amount: 0.2 });
+
+  if (shouldReduceMotion) {
+    // Return plain text if user prefers reduced motion
+    return <span className={className}>{text}</span>;
+  }
+
   const getInitialPosition = () => {
     switch (direction) {
       case 'up': return { y: 20, opacity: 0 };
@@ -195,23 +212,77 @@ export function CharacterSplit({
     },
   };
 
+  // Only enable background-clip / transparent text fill when the caller actually applies a gradient/text-clip class.
+  const enableClip = /bg-clip-text|text-transparent|bg-gradient/.test(className);
+
+  const containerStyle: CSSProperties = {
+    display: 'inline-block',
+    ...(enableClip
+      ? {
+          // Apply background-clip/text-fill so the element's own gradient background (from Tailwind classes)
+          // is visible through the text. Do NOT override the background itself.
+          backgroundClip: 'text' as CSSProperties['backgroundClip'],
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+        }
+      : {}),
+  };
+
+  // If the caller requested gradient/text-clip styling, render the whole text as a single animated span.
+  // This avoids per-character background-clip rendering issues where child spans don't correctly show
+  // the parent's gradient in all browsers and can appear invisible.
+  if (enableClip) {
+    return (
+      <motion.span
+        ref={containerRef}
+        variants={containerVariants}
+        initial="hidden"
+        animate={inView ? 'visible' : 'hidden'}
+        className={className}
+        style={containerStyle}
+      >
+        {text}
+      </motion.span>
+    );
+  }
+
   return (
-    <motion.div
+    // Use a span as the outer container and force inline-block to avoid mobile inline transform issues.
+    <motion.span
+      ref={containerRef}
       variants={containerVariants}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
+      // drive animation via inView for consistent behavior across browsers (including mobile)
+      animate={inView ? 'visible' : 'hidden'}
       className={className}
+      style={containerStyle}
     >
       {text.split('').map((char, index) => (
         <motion.span
-          key={index}
+          key={`${char}-${index}`}
           variants={charVariants}
           className="inline-block"
+          // Ensure mobile-friendly rendering & hint GPU acceleration
+          style={{
+            display: char === ' ' ? 'inline' : 'inline-block',
+            WebkitFontSmoothing: 'antialiased',
+            backfaceVisibility: 'hidden',
+            willChange: 'transform, opacity',
+            transform: 'translateZ(0)',
+            // Only apply text-clip / transparent fill when enabled by the parent class.
+            ...(enableClip
+              ? {
+                  // Characters inherit the container's clip; only force transparent fill so the
+                  // background-clip on the container shows through per character.
+                  color: 'transparent',
+                  WebkitTextFillColor: 'transparent',
+                }
+              : {}),
+          }}
         >
           {char === ' ' ? '\u00A0' : char}
         </motion.span>
       ))}
-    </motion.div>
+    </motion.span>
   );
 }

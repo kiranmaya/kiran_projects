@@ -89,8 +89,8 @@ export default function Contact({ personalInfo }: ContactProps) {
             Get In Touch
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            I'm always interested in new opportunities and exciting projects.
-            Let's discuss how we can work together!
+            I&apos;m always interested in new opportunities and exciting projects.
+            Let&apos;s discuss how we can work together!
           </p>
         </motion.div>
 
@@ -106,11 +106,11 @@ export default function Contact({ personalInfo }: ContactProps) {
             <motion.div variants={itemVariants} className="space-y-8">
               <div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                  Let's Connect
+                  Let&apos;s Connect
                 </h3>
                 <p className="text-gray-600 mb-8">
                   Whether you have a project in mind, want to collaborate, or just
-                  want to say hello, I'd love to hear from you. Here are the best
+                  want to say hello, I&apos;d love to hear from you. Here are the best
                   ways to reach me:
                 </p>
               </div>
@@ -244,7 +244,7 @@ export default function Contact({ personalInfo }: ContactProps) {
                         />
                       </h4>
                       <p className="text-gray-600">
-                        Thank you for reaching out. I'll get back to you soon!
+                        Thank you for reaching out. I&apos;ll get back to you soon!
                       </p>
                     </motion.div>
                   ) : (

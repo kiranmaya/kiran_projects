@@ -88,3 +88,10 @@ export interface SEOData {
   ogImage?: string;
   canonical?: string;
 }
+
+// ========================================
+// ANIMATION TYPES
+// ========================================
+
+// Re-export all animation types from the animations module
+export * from './animations';

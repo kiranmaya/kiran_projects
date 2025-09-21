@@ -12,6 +12,12 @@ import {
 import { Skill, SkillCategory } from '@/types';
 import TextAnimation, { CharacterSplit } from '@/components/ui/TextAnimation';
 
+import { 
+  Glitch
+} from '@/components/ui/animations';
+
+
+
 interface SkillsProps {
   skills: Skill[];
 }
@@ -91,7 +97,7 @@ export default function Skills({ skills }: SkillsProps) {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {Object.entries(skillsByCategory).map(([category, categorySkills], categoryIndex) => {
+          {Object.entries(skillsByCategory).map(([category, categorySkills], _categoryIndex) => {
             const Icon = categoryIcons[category as SkillCategory];
             const colorGradient = categoryColors[category as SkillCategory];
 
@@ -124,7 +130,7 @@ export default function Skills({ skills }: SkillsProps) {
                 </motion.h3>
 
                 <div className="space-y-3">
-                  {categorySkills.map((skill, skillIndex) => (
+                  {categorySkills.map((skill, _skillIndex) => (
                     <motion.div
                       key={skill.id}
                       variants={itemVariants}
@@ -172,13 +178,28 @@ export default function Skills({ skills }: SkillsProps) {
           className="mt-16 text-center"
         >
           <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              <TextAnimation
-                text="Always Learning"
-                type="typewriter"
-                className="inline-block"
-              />
-            </h3>
+            <motion.h3
+              variants={itemVariants}
+              className="text-2xl font-bold text-gray-900 mb-4"
+            >
+              <motion.span
+                className="text-4xl font-bold text-black relative block"
+                animate={{
+                  x: [0, -2, 2, -2, 2, 0],
+                  textShadow: [
+                    "0 0 0 rgba(255,0,0,0)",
+                    "-2px 0 red, 2px 0 cyan",
+                    "2px 0 red, -2px 0 cyan",
+                    "-2px 0 red, 2px 0 cyan",
+                    "2px 0 red, -2px 0 cyan",
+                    "0 0 0 rgba(255,0,0,0)"
+                  ]
+                }}
+                transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 3 }}
+              >
+                Always Learning
+              </motion.span>
+            </motion.h3>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -186,7 +207,7 @@ export default function Skills({ skills }: SkillsProps) {
               viewport={{ once: true }}
               className="text-gray-600 max-w-2xl mx-auto"
             >
-              Technology evolves rapidly, and I'm committed to continuous learning.
+              Technology evolves rapidly, and I&apos;m committed to continuous learning.
               I regularly explore new frameworks, tools, and best practices to stay
               current and deliver cutting-edge solutions.
             </motion.p>

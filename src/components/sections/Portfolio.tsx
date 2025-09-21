@@ -25,11 +25,7 @@ export default function Portfolio({ projects }: PortfolioProps) {
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory | 'all'>('all');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  // Debug logging
-  console.log('Portfolio component rendered');
-  console.log('Projects prop:', projects);
-  console.log('Projects length:', projects?.length || 0);
-  console.log('Selected category:', selectedCategory);
+ 
 
   const filteredProjects = selectedCategory === 'all'
     ? projects
@@ -39,8 +35,7 @@ export default function Portfolio({ projects }: PortfolioProps) {
           (selectedCategory as string).toLowerCase()
       );
 
-  console.log('Filtered projects length:', filteredProjects?.length || 0);
-  console.log('Filtered projects:', filteredProjects);
+ 
 
   const containerVariants = {
     hidden: { opacity: 0 },

@@ -1,0 +1,140 @@
+  kiran.killstreak@gmail.com                                                             
+ ☏: 9666099355
+Career Objective & Summary of Experience
+
+As an enthusiastic and ambitious Game Developer with creative flair, I achieve organizational objectives by blending my knowledge and developing the best by implementing the latest cutting-edge technologies of the game industry.
+
+Overall 18+ Years of work experience, of which I have 13+ years of experience in Game Development. Developed, designed & Published 60+ Games for Android/IO’S and Web Platforms. Help Count in other colleague projects is Unlimited. 
+
+Author of 10+ complete game source tutorials for smartphones using Unity3d.
+
+To Design and Develop AAA Game Titles for IOS /Android/Consoles.
+
+
+
+Educational Qualifications
+
+Bachelor of Technology in Computer Science Engineering from Dr. Paul Raj Engineering College, Bhadrachalam (Affiliated to JNTU, Hyderabad).
+
+Intermediate (Math, Physics & Chemistry) from Excellent College in Khammam.
+
+S.S.C, from Little Flowers, Bhadrachalam.
+
+Asset Store Publisher
+
+I have been a publisher in the Unity Asset Store.
+Link: https://assetstore.unity.com/publishers/920
+
+Work Experience
+
+
+
+Worked as a Senior Game Programmer in  Ace Games  Pvt. Ltd, Hyderabad, from January 2014 to the Present.
+
+Worked as a Senior Game Programmer in Gameshastra  Pvt. Ltd, Hyderabad,  from May 2012 to December 2013.
+
+Worked as a Game Programmer in Voice Gate India Pvt. Ltd, Hyderabad, January 2010 to May 2012.
+
+Worked as a Networking Administrator at Helix-e Technologies, Hyderabad, from Aug 2007 to Jul 2009.
+
+
+
+
+Software Skills
+
+       Languages                   :  C++, C#, Core JAVA, JavaScript
+       Tools	                  :  Unity3d, Unreal
+       Operating Systems     :  Mac OS, Windows, Ubuntu.
+       SDKs: .NET libs, Blazor.                     
+
+Projects
+
+I have developed Games for IOS and Android. These are a few games that achieved Quality and Good Reception from players.
+
+Note: Chrome PDF viewer supports these links, which are clickable.
+
+1) Kochadiyaan Game
+Link:Kochadaiiyaan: Reign of Arrows HD Android GamePlay Trailer [Game For Kids] 
+
+2) Krrish 3: The Game
+Link: krrish 3 Game (Gameplay) | Hritik roshan game
+
+3) Little Krishna Run
+Link:KRISHNA MURARI RUN Running games
+
+4) Ace Strike
+Link:Ace Strike IOS ANDROID Free GAME
+
+5) Real Rocket Racing
+Link:Real Rocket Racing 3d Game Top Best Modern Android IOS Game
+
+6) Arabian Run
+Link: Arabian Run
+
+7) Crowd Control
+Link:Crowd Control Game Free Android
+ 
+8) Belly Clash
+Link: Belly Clash Game New Max Level Gameplay Walkthrough Android iOS Mob9
+
+9) Flash Runner
+Link:NOOB vs PRO vs HACKER in Flash Runner
+
+
+
+Areas of Interest
+
+Machine Learning, Convolutional, LSTM, RNN, Open GYM, AI models, GAN Models. 
+Learning innovations in 3D Design/features/ from forums, blogs, University Papers, 3D Style rendering, and physics solvers.
+Trying to create AAA Titles Graphics.
+Research in software rendering for games and UI frontend.
+Trying To Solve/Understand Millennium Problems, P vs Np.
+
+
+
+
+
+Personal Strengths
+
+Competitive, analytical, and good communication skills.
+Effective documentation and presentation skills.
+Initiative is a proactive approach to problem-solving.
+Ability to work under pressure and on certain tight schedules.
+
+
+
+Personal Details
+
+Name                                         :  Bheemanadham Kiran Kumar
+Father’s Name                           :  Mr. B. Krishna Murthy
+Date of Birth                             :  10th Jan’86
+Languages Known		  :  English, Hindi, and Telugu.
+Permanent Address		  :  House No. 51, Dollar Hills Colony, Pragathi Nagar.     
+                                                     Hyderabad 500090.
+
+Declaration
+        
+I declare that the above-mentioned information is correct to my knowledge. 
+ Place:  Hyderabad
+ Date: 06-OCT-2022	 					   (KIRAN KUMAR.B)
+
+
+
+? PaniPonics – Vertical Farming Website
+Developed a user-friendly e-commerce platform for PaniPonics, a Bangalore-based startup specializing in aeroponic vertical gardening towers. The website offers a seamless shopping experience, providing customers with innovative solutions to grow fresh, pesticide-free vegetables in small spaces. Key features include product listings, detailed descriptions, and a secure checkout process.
+
+? Short News – Mobile-First News Aggregator
+Created a sleek, mobile-optimized news aggregation website using Vercel's v0.app platform. The site delivers concise, real-time updates on NSE F&O markets, designed for traders and investors seeking quick insights. Features include a minimalist interface, fast load times, and responsive design, ensuring an efficient user experience on any device.
+? PaniPonics – Vertical Farming Website
+Tech Stack: React, Tailwind CSS, Framer Motion, MongoDB, Node.js, Express.js
+Developed a user-friendly e-commerce platform for PaniPonics, a startup specializing in aeroponic vertical gardening towers.
+Built a seamless shopping experience with product listings, detailed descriptions, and secure checkout.
+Integrated animations and interactive UI components using Framer Motion to enhance user engagement.
+Backend powered by Node.js and Express.js, with MongoDB for database management.
+
+? Short News – Mobile-First News Aggregator
+Tech Stack: React, Tailwind CSS, Framer Motion, Vercel, MongoDB
+Created a sleek, mobile-optimized news aggregation website delivering concise real-time updates.
+Designed a minimalist, responsive interface for fast loading on any device.
+Used Framer Motion for smooth UI animations and Tailwind CSS for rapid styling.
+Deployed on Vercel for seamless hosting and scalability, with MongoDB for backend data storage.

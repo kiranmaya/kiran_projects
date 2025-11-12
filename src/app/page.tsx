@@ -4,7 +4,7 @@ import Experience from '@/components/sections/Experience';
 import PersonalInfo from '@/components/sections/PersonalInfo';
 import Portfolio from '@/components/sections/Portfolio';
 import Skills from '@/components/sections/Skills';
-import { experiences, personalInfo, projects, skills } from '@/data/sampleData';
+import { experiences, personalInfo, projects, skills } from '@/data/ProfileData';
  
 export default function Home() {
   return (

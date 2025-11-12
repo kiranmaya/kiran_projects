@@ -1,14 +1,14 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import Image from 'next/image';
+import TextAnimation, { CharacterSplit } from '@/components/ui/TextAnimation';
+import { PersonalInfo as PersonalInfoType } from '@/types';
 import {
   EnvelopeIcon,
   MapPinIcon,
   PhoneIcon,
 } from '@heroicons/react/24/outline';
-import { PersonalInfo as PersonalInfoType } from '@/types';
-import TextAnimation, { CharacterSplit } from '@/components/ui/TextAnimation';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 interface PersonalInfoProps {
   data: PersonalInfoType;
@@ -75,13 +75,9 @@ export default function PersonalInfo({ data }: PersonalInfoProps) {
                 delay={0.2}
                 className="block sm:inline"
               />
-              <CharacterSplit
-                text={data.name}
-                direction="up"
-                stagger={0.08}
-                delay={0.8}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent block sm:inline"
-              />
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent block sm:inline">
+                {data.name}
+              </span>
             </h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}

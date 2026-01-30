@@ -6,7 +6,6 @@ interface Effect {
   name: string;
   element: React.ReactElement;
 }
-
 type CategoryType = 'text' | 'div' | 'advanced';
 
 const AnimationShowcase = () => {
@@ -475,8 +474,8 @@ const AnimationShowcase = () => {
             key={category}
             onClick={() => setActiveCategory(category)}
             className={`px-8 py-3 rounded-full font-bold uppercase tracking-wider transition-all ${activeCategory === category
-                ? 'bg-gradient-to-r from-primary to-secondary text-background shadow-lg shadow-primary/20'
-                : 'bg-foreground/5 text-foreground/60 hover:bg-foreground/10'
+              ? 'bg-gradient-to-r from-primary to-secondary text-background shadow-lg shadow-primary/20'
+              : 'bg-foreground/5 text-foreground/60 hover:bg-foreground/10'
               }`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

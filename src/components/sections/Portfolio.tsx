@@ -4,13 +4,11 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import {
-  CalendarIcon,
   CodeBracketIcon,
   EyeIcon,
   LinkIcon,
 } from '@heroicons/react/24/outline';
 import { Project, ProjectCategory } from '@/types';
-import { CharacterSplit } from '@/components/ui/TextAnimation';
 
 interface PortfolioProps {
   projects: Project[];
@@ -18,26 +16,23 @@ interface PortfolioProps {
 
 const categoryFilters: { value: ProjectCategory | 'all'; label: string }[] = [
   { value: 'all', label: 'All Projects' },
+  { value: 'ai', label: 'AI & ML' },
   { value: 'web', label: 'Web Apps' },
   { value: 'game', label: 'Games' },
-  
+  { value: 'tool', label: 'Tools' },
 ];
 
 export default function Portfolio({ projects }: PortfolioProps) {
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory | 'all'>('all');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
- 
-
   const filteredProjects = selectedCategory === 'all'
     ? projects
     : projects.filter(
-        project =>
-          project.category.toLowerCase() ===
-          (selectedCategory as string).toLowerCase()
-      );
-
- 
+      project =>
+        project.category.toLowerCase() ===
+        (selectedCategory as string).toLowerCase()
+    );
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -69,35 +64,23 @@ export default function Portfolio({ projects }: PortfolioProps) {
   const getStatusColor = (status: Project['status']) => {
     switch (status) {
       case 'completed':
-        return 'bg-green-100 text-green-800';
+        return 'bg-green-900/50 text-green-300 border border-green-700';
       case 'in-progress':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-blue-900/50 text-blue-300 border border-blue-700';
       case 'planned':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-yellow-900/50 text-yellow-300 border border-yellow-700';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-800 text-gray-400';
     }
   };
 
-// Resolve image path for a project using public/images as fallback
-const getImageSrc = (project: Project) => {
-  // If the project already points to /images, use it
-  if (project.image && project.image.startsWith('/images')) {
+  const getImageSrc = (project: Project) => {
+    // Basic fallback logic if needed
     return project.image;
-  }
+  };
 
-  // If image uses /projects/ path, try the equivalent /images/ path
-  if (project.image && project.image.startsWith('/')) {
-    return project.image.replace(/^\/projects\//, '/images/');
-  }
-
-  // Fallback: try using the project title as filename in public/images (best-effort)
-  // Example: title "Ace Strike" -> "/images/Ace%20Strike.jpg"
-  const titlePath = `/images/${encodeURIComponent(project.title)}.jpg`;
-  return titlePath;
-};
   return (
-    <section id="portfolio" className="py-20 bg-white">
+    <section id="portfolio" className="py-20 bg-[#0a0a0a] text-gray-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -106,23 +89,13 @@ const getImageSrc = (project: Project) => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            <CharacterSplit
-              text="Portfolio"
-              direction="up"
-              stagger={0.08}
-              delay={0.2}
-            />
+          <h2 className="text-3xl sm:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+            Selected Works
           </h2>
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            viewport={{ once: true }}
-            className="text-lg text-gray-600 max-w-2xl mx-auto"
+            className="text-lg text-gray-400 max-w-2xl mx-auto"
           >
-            A showcase of my recent projects, featuring web applications, games,
-            and interactive experiences I&apos;ve built.
+            A curated collection of my work in AI, Game Development, and Web Technologies.
           </motion.p>
         </motion.div>
 
@@ -140,11 +113,10 @@ const getImageSrc = (project: Project) => {
               onClick={() => {
                 setSelectedCategory(filter.value);
               }}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                selectedCategory === filter.value
-                  ? 'bg-blue-600 text-white shadow-md'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
+              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-200 border ${selectedCategory === filter.value
+                ? 'bg-blue-600 border-blue-600 text-white shadow-[0_0_15px_rgba(37,99,235,0.5)]'
+                : 'bg-transparent border-gray-700 text-gray-400 hover:border-gray-500 hover:text-white'
+                }`}
             >
               {filter.label}
             </button>
@@ -164,39 +136,29 @@ const getImageSrc = (project: Project) => {
             <motion.div
               key={project.id}
               variants={itemVariants}
-              className="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden"
+              className="group bg-gray-900 rounded-xl border border-gray-800 shadow-xl overflow-hidden hover:border-blue-500/50 transition-all duration-300"
             >
               {/* Project Image */}
-              <div className="relative overflow-hidden">
-               
-               
-                <div className="aspect-video bg-gray-100 overflow-hidden relative">
-                  <Image
-                    src={getImageSrc(project)}
-                    alt={project.title}
-                    width={400}
-                    height={225}
-                    className="w-full h-full object-cover bg-transparent block relative z-10"
-                    onLoad={(e) => {
-                      const target = e.currentTarget as HTMLImageElement;
-                      if (target.naturalWidth === 0 || target.naturalHeight === 0) {
-                        // Image has zero natural size - could be a broken image
-                      }
-                    }}
-                    onError={(e) => {
-                      const target = e.currentTarget as HTMLImageElement;
-                      // Try fallback (profile) once
-                      if (!target.dataset.fallback) {
-                        target.dataset.fallback = '1';
-                        target.src = '/images/kiranphoto.jpg';
-                      }
-                    }}
-                  />
+              <div className="relative overflow-hidden aspect-video bg-gray-800">
+                {/* Since we don't have real images yet, use a placeholder gradient or try to load the image */}
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center text-gray-600">
+                  <span className="text-4xl">🚀</span>
                 </div>
-               
+
+                <Image
+                  src={getImageSrc(project)}
+                  alt={project.title}
+                  width={400}
+                  height={225}
+                  className="w-full h-full object-cover relative z-10 opacity-80 group-hover:opacity-100 transition-opacity duration-300 mix-blend-overlay"
+                  onError={(e) => {
+                    // Hide image on error to show placeholder
+                    e.currentTarget.style.display = 'none';
+                  }}
+                />
 
                 {/* Status Badge */}
-                <div className="absolute top-4 right-4">
+                <div className="absolute top-4 right-4 z-20">
                   <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(project.status)}`}>
                     {project.status}
                   </span>
@@ -204,40 +166,30 @@ const getImageSrc = (project: Project) => {
 
                 {/* Featured Badge */}
                 {project.featured && (
-                  <div className="absolute top-4 left-4">
-                    <span className="px-2 py-1 bg-yellow-500 text-white rounded-full text-xs font-medium">
+                  <div className="absolute top-4 left-4 z-20">
+                    <span className="px-2 py-1 bg-gradient-to-r from-yellow-500 to-amber-600 text-white rounded-full text-xs font-medium shadow-lg">
                       Featured
                     </span>
                   </div>
                 )}
 
                 {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 flex items-center justify-center pointer-events-none">
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex space-x-4">
+                <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-30">
+                  <div className="flex space-x-4">
                     <button
                       onClick={() => setSelectedProject(project)}
-                      className="p-3 bg-white rounded-full text-gray-900 hover:bg-gray-100 transition-colors duration-200"
+                      className="p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white hover:bg-white/20 transition-all duration-200"
                     >
-                      <EyeIcon className="w-5 h-5" />
+                      <EyeIcon className="w-6 h-6" />
                     </button>
                     {project.demoUrl && (
                       <a
                         href={project.demoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-3 bg-white rounded-full text-gray-900 hover:bg-gray-100 transition-colors duration-200"
+                        className="p-3 bg-blue-600/80 backdrop-blur-md rounded-full text-white hover:bg-blue-600 transition-all duration-200 shadow-lg shadow-blue-500/30"
                       >
-                        <LinkIcon className="w-5 h-5" />
-                      </a>
-                    )}
-                    {project.githubUrl && (
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-3 bg-white rounded-full text-gray-900 hover:bg-gray-100 transition-colors duration-200"
-                      >
-                        <CodeBracketIcon className="w-5 h-5" />
+                        <LinkIcon className="w-6 h-6" />
                       </a>
                     )}
                   </div>
@@ -246,72 +198,29 @@ const getImageSrc = (project: Project) => {
 
               {/* Project Content */}
               <div className="p-6">
-                <motion.h3
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                  viewport={{ once: true }}
-                  className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-200"
-                >
+                <h3 className="text-xl font-bold text-gray-100 mb-2 group-hover:text-blue-400 transition-colors duration-200">
                   {project.title}
-                </motion.h3>
-                <motion.p
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  viewport={{ once: true }}
-                  className="text-gray-600 mb-4 line-clamp-3"
-                >
+                </h3>
+                <p className="text-gray-400 mb-4 line-clamp-3 text-sm">
                   {project.description}
-                </motion.p>
+                </p>
 
                 {/* Technologies */}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  viewport={{ once: true }}
-                  className="flex flex-wrap gap-2 mb-4"
-                >
+                <div className="flex flex-wrap gap-2 mb-4">
                   {project.technologies.slice(0, 3).map((tech, index) => (
-                    <motion.span
+                    <span
                       key={index}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.3, delay: 0.4 + index * 0.1 }}
-                      viewport={{ once: true }}
-                      className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium"
+                      className="px-2 py-1 bg-gray-800 text-gray-300 rounded text-xs font-medium border border-gray-700"
                     >
                       {tech}
-                    </motion.span>
+                    </span>
                   ))}
                   {project.technologies.length > 3 && (
-                    <motion.span
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.3, delay: 0.7 }}
-                      viewport={{ once: true }}
-                      className="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs font-medium"
-                    >
-                      +{project.technologies.length - 3} more
-                    </motion.span>
+                    <span className="px-2 py-1 bg-gray-800 text-gray-400 rounded text-xs font-medium border border-gray-700">
+                      +{project.technologies.length - 3}
+                    </span>
                   )}
-                </motion.div>
-
-                {/* Date */}
-                <motion.div
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                  viewport={{ once: true }}
-                  className="flex items-center text-gray-500 text-sm"
-                >
-                  <CalendarIcon className="w-4 h-4 mr-1" />
-                  <span>
-                    {formatDate(project.startDate)}
-                    {project.endDate && ` - ${formatDate(project.endDate)}`}
-                  </span>
-                </motion.div>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -324,97 +233,71 @@ const getImageSrc = (project: Project) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+              className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50 p-4"
               onClick={() => setSelectedProject(null)}
             >
               <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+                initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                className="bg-[#111] border border-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="p-8">
                   <div className="flex justify-between items-start mb-6">
                     <div>
-                      <motion.h2
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="text-3xl font-bold text-gray-900 mb-2"
-                      >
+                      <h2 className="text-3xl font-bold text-white mb-2">
                         {selectedProject.title}
-                      </motion.h2>
-                      <motion.p
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.1 }}
-                        className="text-gray-600"
-                      >
+                      </h2>
+                      <p className="text-gray-400">
                         {selectedProject.longDescription || selectedProject.description}
-                      </motion.p>
+                      </p>
                     </div>
-                    <motion.button
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.3 }}
+                    <button
                       onClick={() => setSelectedProject(null)}
-                      className="text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                      className="text-gray-500 hover:text-white transition-colors duration-200"
                     >
-                      <span className="text-2xl">×</span>
-                    </motion.button>
+                      <span className="text-3xl">×</span>
+                    </button>
                   </div>
 
                   {/* Project Details */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                        Project Details
+                      <h3 className="text-lg font-semibold text-gray-200 mb-4">
+                        Details
                       </h3>
                       <div className="space-y-3">
-                        <motion.div
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.4, delay: 0.2 }}
-                        >
-                          <span className="font-medium text-gray-700">Status:</span>
-                          <span className={`ml-2 px-2 py-1 rounded-full text-sm font-medium ${getStatusColor(selectedProject.status)}`}>
+                        <div className="flex items-center">
+                          <span className="font-medium text-gray-500 w-24">Status:</span>
+                          <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${getStatusColor(selectedProject.status)}`}>
                             {selectedProject.status}
                           </span>
-                        </motion.div>
-                        <motion.div
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.4, delay: 0.3 }}
-                        >
-                          <span className="font-medium text-gray-700">Category:</span>
-                          <span className="ml-2 text-gray-600 capitalize">
+                        </div>
+                        <div className="flex items-center">
+                          <span className="font-medium text-gray-500 w-24">Category:</span>
+                          <span className="text-gray-300 capitalize">
                             {selectedProject.category}
                           </span>
-                        </motion.div>
-                        <motion.div
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.4, delay: 0.4 }}
-                        >
-                          <span className="font-medium text-gray-700">Duration:</span>
-                          <span className="ml-2 text-gray-600">
+                        </div>
+                        <div className="flex items-center">
+                          <span className="font-medium text-gray-500 w-24">Timeline:</span>
+                          <span className="text-gray-300">
                             {formatDate(selectedProject.startDate)}
-                            {selectedProject.endDate && ` - ${formatDate(selectedProject.endDate)}`}
                           </span>
-                        </motion.div>
+                        </div>
                       </div>
                     </div>
 
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                        Technologies
+                      <h3 className="text-lg font-semibold text-gray-200 mb-4">
+                        Tech Stack
                       </h3>
                       <div className="flex flex-wrap gap-2">
                         {selectedProject.technologies.map((tech, index) => (
                           <span
                             key={index}
-                            className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium"
+                            className="px-3 py-1 bg-blue-900/30 text-blue-300 border border-blue-900/50 rounded-full text-sm font-medium"
                           >
                             {tech}
                           </span>
@@ -425,76 +308,49 @@ const getImageSrc = (project: Project) => {
 
                   {/* Highlights */}
                   {selectedProject.highlights.length > 0 && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: 0.5 }}
-                      className="mt-8"
-                    >
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                        Key Highlights
+                    <div className="mb-8">
+                      <h3 className="text-lg font-semibold text-gray-200 mb-4">
+                        Highlights
                       </h3>
                       <ul className="space-y-2">
                         {selectedProject.highlights.map((highlight, index) => (
-                          <motion.li
+                          <li
                             key={index}
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
-                            className="flex items-start text-gray-700"
+                            className="flex items-center text-gray-400"
                           >
-                            <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0" />
+                            <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-3 flex-shrink-0" />
                             {highlight}
-                          </motion.li>
+                          </li>
                         ))}
                       </ul>
-                    </motion.div>
+                    </div>
                   )}
 
                   {/* Action Buttons */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.7 }}
-                    className="mt-8 flex flex-wrap gap-4"
-                  >
+                  <div className="flex flex-wrap gap-4 pt-6 border-t border-gray-800">
                     {selectedProject.demoUrl && (
-                      <motion.a
+                      <a
                         href={selectedProject.demoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors duration-200"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        className="px-6 py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-500 transition-colors duration-200 shadow-lg shadow-blue-500/20 flex items-center gap-2"
                       >
-                        View Demo
-                      </motion.a>
+                        <LinkIcon className="w-5 h-5" />
+                        Live Demo
+                      </a>
                     )}
                     {selectedProject.githubUrl && (
-                      <motion.a
+                      <a
                         href={selectedProject.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-medium hover:border-blue-500 hover:text-blue-600 transition-colors duration-200"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                        className="px-6 py-3 border border-gray-600 text-gray-300 rounded-lg font-bold hover:border-white hover:text-white transition-colors duration-200 flex items-center gap-2"
                       >
-                        View Code
-                      </motion.a>
+                        <CodeBracketIcon className="w-5 h-5" />
+                        Source Code
+                      </a>
                     )}
-                    {selectedProject.liveUrl && (
-                      <motion.a
-                        href={selectedProject.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors duration-200"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        Live Site
-                      </motion.a>
-                    )}
-                  </motion.div>
+                  </div>
                 </div>
               </motion.div>
             </motion.div>

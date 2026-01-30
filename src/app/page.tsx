@@ -5,7 +5,7 @@ import PersonalInfo from '@/components/sections/PersonalInfo';
 import Portfolio from '@/components/sections/Portfolio';
 import Skills from '@/components/sections/Skills';
 import { experiences, personalInfo, projects, skills } from '@/data/ProfileData';
- 
+
 export default function Home() {
   return (
     <Layout>
@@ -13,12 +13,7 @@ export default function Home() {
       <Skills skills={skills} />
       <Experience experiences={experiences} />
       <Portfolio projects={projects} />
-      <Contact personalInfo={{
-        email: personalInfo.email,
-        phone: personalInfo.phone,
-        location: personalInfo.location,
-        socialLinks: personalInfo.socialLinks
-      }} />
+      <Contact personalInfo={personalInfo} />
     </Layout>
   );
 }

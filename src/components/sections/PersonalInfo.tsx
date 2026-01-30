@@ -1,13 +1,13 @@
 'use client';
 
-import TextAnimation, { CharacterSplit } from '@/components/ui/TextAnimation';
 import { PersonalInfo as PersonalInfoType } from '@/types';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { TypeAnimation } from 'react-type-animation';
 import {
-  EnvelopeIcon,
-  MapPinIcon,
-  PhoneIcon,
+  CodeBracketIcon,
+  CommandLineIcon,
+  SparklesIcon
 } from '@heroicons/react/24/outline';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 interface PersonalInfoProps {
@@ -15,227 +15,137 @@ interface PersonalInfoProps {
 }
 
 export default function PersonalInfo({ data }: PersonalInfoProps) {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
-  };
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
+  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="max-w-4xl mx-auto text-center"
-        >
-          {/* Avatar */}
-          <motion.div variants={itemVariants} className="mb-8">
-            <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 p-1">
-              <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
-                {data.avatar ? (
-                  <Image
-                    src={data.avatar}
-                    alt={`${data.name} avatar`}
-                    width={128}
-                    height={128}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <span className="text-4xl font-bold text-gray-700">
-                    {data.name.split(' ').map(n => n[0]).join('')}
-                  </span>
-                )}
-              </div>
-            </div>
-          </motion.div>
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black text-white p-4">
 
-          {/* Main Content */}
-          <motion.div variants={itemVariants} className="mb-8">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
-              <CharacterSplit
-                text="Hi, I'm  "
-                direction="up"
-                stagger={0.05}
-                delay={0.2}
-                className="block sm:inline"
-              />
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent block sm:inline">
+      {/* Background Elements */}
+      <div className="absolute inset-0 z-0 opacity-20">
+        <div className="absolute top-10 left-10 w-64 h-64 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+        <div className="absolute top-10 right-10 w-64 h-64 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-8 left-20 w-64 h-64 bg-pink-600 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
+      </div>
+
+      {/* Grid Pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)] z-0 pointer-events-none"></div>
+
+      <div className="container mx-auto z-10 relative">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+
+          {/* Text Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex-1 text-center lg:text-left"
+          >
+            <div className="inline-block px-4 py-2 mb-4 rounded-full border border-gray-700 bg-gray-900/50 backdrop-blur-md">
+              <span className="flex items-center gap-2 text-sm text-gray-300">
+                <SparklesIcon className="w-4 h-4 text-yellow-400" />
+                <span>AI & Next.js Implementation Specialist</span>
+              </span>
+            </div>
+
+            <h1 className="text-5xl lg:text-7xl font-bold mb-6 tracking-tight">
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
                 {data.name}
               </span>
             </h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.5 }}
-              viewport={{ once: true }}
-              className="text-xl sm:text-2xl text-gray-600 mb-6"
-            >
-              <CharacterSplit
-                text={data.title}
-                direction="up"
-                stagger={0.03}
-                delay={1.6}
+
+            <div className="text-xl lg:text-3xl text-gray-400 mb-8 h-20">
+              <TypeAnimation
+                sequence={[
+                  'Building AI Agents.',
+                  1000,
+                  'Crafting Next.js Apps.',
+                  1000,
+                  'Training Neural Networks.',
+                  1000,
+                  'Solving Complex Problems.',
+                  1000
+                ]}
+                wrapper="span"
+                speed={50}
+                repeat={Infinity}
+                className="font-mono text-blue-400"
               />
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.8 }}
-              viewport={{ once: true }}
-              className="text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed"
-            >
-              <TextAnimation
-                text={data.bio}
-                type="split"
-                className="inline"
-                delay={1.9}
-                stagger={0.02}
-              />
-            </motion.p>
+            </div>
+
+            <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+              {data.about}
+            </p>
+
+            <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+              <button
+                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                className="px-8 py-3 bg-white text-black font-bold rounded-lg hover:bg-gray-200 transition-all flex items-center gap-2"
+              >
+                <CommandLineIcon className="w-5 h-5" />
+                View Projects
+              </button>
+              <button
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                className="px-8 py-3 bg-transparent border border-gray-600 text-white font-bold rounded-lg hover:border-white hover:bg-white/5 transition-all flex items-center gap-2"
+              >
+                <CodeBracketIcon className="w-5 h-5" />
+                Contact Me
+              </button>
+            </div>
           </motion.div>
 
-          {/* Contact Information */}
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 2.2 }}
-              viewport={{ once: true }}
-              className="flex items-center text-gray-600"
-            >
-              <motion.div
-                whileHover={{ scale: 1.2, rotate: 5 }}
-                transition={{ duration: 0.2 }}
-              >
-                <MapPinIcon className="w-5 h-5 mr-2 text-blue-500" />
-              </motion.div>
-              <span>{data.location}</span>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 2.4 }}
-              viewport={{ once: true }}
-              className="flex items-center text-gray-600"
-            >
-              <motion.div
-                whileHover={{ scale: 1.2, rotate: 5 }}
-                transition={{ duration: 0.2 }}
-              >
-                <EnvelopeIcon className="w-5 h-5 mr-2 text-blue-500" />
-              </motion.div>
-              <motion.a
-                href={`mailto:${data.email}`}
-                className="hover:text-blue-600 transition-colors duration-200"
-                whileHover={{ x: 3 }}
-                transition={{ duration: 0.2 }}
-              >
-                {data.email}
-              </motion.a>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 2.6 }}
-              viewport={{ once: true }}
-              className="flex items-center text-gray-600"
-            >
-              <motion.div
-                whileHover={{ scale: 1.2, rotate: 5 }}
-                transition={{ duration: 0.2 }}
-              >
-                <PhoneIcon className="w-5 h-5 mr-2 text-blue-500" />
-              </motion.div>
-              <motion.a
-                href={`tel:${data.phone}`}
-                className="hover:text-blue-600 transition-colors duration-200"
-                whileHover={{ x: 3 }}
-                transition={{ duration: 0.2 }}
-              >
-                {data.phone}
-              </motion.a>
-            </motion.div>
-          </motion.div>
-
-          {/* Social Links */}
-          <motion.div variants={itemVariants} className="flex justify-center space-x-6 mb-12">
-            {data.socialLinks.map((link, index) => (
-              <motion.a
-                key={index}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 bg-white rounded-full shadow-md flex items-center justify-center text-gray-600 hover:text-blue-600 hover:shadow-lg transition-all duration-200"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span className="text-sm font-medium">{link.platform[0]}</span>
-              </motion.a>
-            ))}
-          </motion.div>
-
-          {/* CTA Buttons */}
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center">
-            <motion.button
-              onClick={() => {
-                const element = document.querySelector('#portfolio');
-                element?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium shadow-lg hover:shadow-xl transition-all duration-200 overflow-hidden relative"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <motion.span
-                className="inline-block"
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.2 }}
-              >
-                View My Work
-              </motion.span>
-            </motion.button>
-            <motion.button
-              onClick={() => {
-                const element = document.querySelector('#contact');
-                element?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="px-8 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-medium hover:border-blue-500 hover:text-blue-600 transition-all duration-200 overflow-hidden relative"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <motion.span
-                className="inline-block"
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.2 }}
-              >
-                Get In Touch
-              </motion.span>
-            </motion.button>
-          </motion.div>
-
-          {/* Scroll Indicator */}
+          {/* Visual/Hero Image */}
           <motion.div
-            variants={itemVariants}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+            style={{ y: y1 }}
+            className="flex-1 relative hidden lg:block"
           >
-           
+            <div className="relative w-[500px] h-[600px] mx-auto">
+              <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-purple-500/20 rounded-3xl transform rotate-6 border border-white/10 backdrop-blur-sm"></div>
+              <div className="absolute inset-0 bg-gray-900/80 rounded-3xl transform -rotate-3 border border-gray-700 overflow-hidden shadow-2xl">
+                <div className="p-6">
+                  <div className="flex gap-2 mb-4">
+                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                  </div>
+                  <div className="font-mono text-sm text-gray-400">
+                    <p className="mb-2"><span className="text-purple-400">class</span> <span className="text-yellow-400">Developer</span>:</p>
+                    <p className="pl-4 mb-2"><span className="text-blue-400">def</span> <span className="text-yellow-400">__init__</span>(self):</p>
+                    <p className="pl-8 mb-2">self.stack = [<span className="text-green-400">&apos;Next.js&apos;</span>, <span className="text-green-400">&apos;Python&apos;</span>, <span className="text-green-400">&apos;PyTorch&apos;</span>]</p>
+                    <p className="pl-8 mb-2">self.passion = <span className="text-green-400">&apos;AI Agents & Automation&apos;</span></p>
+                    <p className="pl-8 mb-2">self.location = <span className="text-green-400">&apos;{data.location}&apos;</span></p>
+                    <br />
+                    <p className="pl-4 mb-2"><span className="text-blue-400">def</span> <span className="text-yellow-400">build_future</span>(self):</p>
+                    <p className="pl-8 mb-2"><span className="text-purple-400">return</span> <span className="text-green-400">&apos;ZeroLoss Systems&apos;</span></p>
+                  </div>
+
+                  <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent"></div>
+                </div>
+              </div>
+
+              {/* Floating Badges */}
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -right-8 top-20 bg-gray-800 p-4 rounded-xl border border-gray-700 shadow-xl"
+              >
+                <Image src="/images/nextjs-icon.png" alt="Next.js" width={40} height={40} className="w-10 h-10" />
+                {/* Note: Ensure these images exist or handle fallback. Using text for now if image fails */}
+              </motion.div>
+
+              <motion.div
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                className="absolute -left-12 bottom-40 bg-gray-800 p-4 rounded-xl border border-gray-700 shadow-xl"
+              >
+                <span className="text-2xl">🧠</span>
+              </motion.div>
+            </div>
           </motion.div>
-        </motion.div>
+
+        </div>
       </div>
     </section>
   );

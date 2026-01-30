@@ -28,12 +28,12 @@ const categoryIcons: Record<string, React.ComponentType<{ className?: string }>>
 };
 
 const categoryColors: Record<string, string> = {
-  ai: 'from-purple-500 to-pink-500',
-  web: 'from-blue-500 to-cyan-500',
-  game: 'from-green-500 to-emerald-500',
-  tool: 'from-orange-500 to-red-500',
-  design: 'from-pink-500 to-rose-500',
-  other: 'from-gray-500 to-slate-500',
+  ai: 'from-primary to-secondary',
+  web: 'from-secondary to-accent',
+  game: 'from-accent to-primary',
+  tool: 'from-primary/80 to-accent/80',
+  design: 'from-secondary to-primary',
+  other: 'from-primary/60 to-secondary/60',
 };
 
 const categoryLabels: Record<string, string> = {
@@ -41,14 +41,13 @@ const categoryLabels: Record<string, string> = {
   web: "Web Development",
   game: "Game Development",
   tool: "Tools & DevOps",
-  design: "Design",
-  other: "Other"
+  design: "UI/UX Design",
+  other: "Other Skills"
 };
 
 export default function Skills({ skills }: SkillsProps) {
   // Group skills by category
   const skillsByCategory = skills.reduce((acc, skill) => {
-    // Default to 'other' if category not found or just use the string
     const cat = skill.category || 'other';
     if (!acc[cat]) {
       acc[cat] = [];
@@ -78,7 +77,7 @@ export default function Skills({ skills }: SkillsProps) {
   };
 
   return (
-    <section id="skills" className="py-20 bg-black text-gray-200">
+    <section id="skills" className="py-20 bg-background text-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -87,10 +86,10 @@ export default function Skills({ skills }: SkillsProps) {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+          <h2 className="text-3xl sm:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
             Technical Arsenal
           </h2>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+          <p className="text-lg text-foreground/60 max-w-2xl mx-auto">
             My proficiency in various technologies, from AI models to game engines.
           </p>
         </motion.div>
@@ -108,13 +107,13 @@ export default function Skills({ skills }: SkillsProps) {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl p-6 hover:border-gray-600 transition-colors duration-300"
+                className="bg-foreground/5 backdrop-blur-sm border border-foreground/10 rounded-xl p-6 hover:border-primary/30 transition-colors duration-300"
               >
                 <div className="flex items-center gap-4 mb-6">
-                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${colorGradient} flex items-center justify-center shadow-lg`}>
-                    <Icon className="w-6 h-6 text-white" />
+                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${colorGradient} flex items-center justify-center shadow-lg shadow-primary/10`}>
+                    <Icon className="w-6 h-6 text-background" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-100">
+                  <h3 className="text-xl font-bold text-foreground">
                     {label}
                   </h3>
                 </div>
@@ -122,14 +121,14 @@ export default function Skills({ skills }: SkillsProps) {
                 <div className="space-y-6">
                   {categorySkills.map((skill) => (
                     <motion.div
-                      key={skill.name} // Use name or ID
+                      key={skill.name}
                       variants={itemVariants}
                     >
                       <div className="flex justify-between items-center mb-2">
-                        <span className="text-gray-300 font-medium">{skill.name}</span>
-                        <span className="text-gray-500 text-sm">{skill.level}%</span>
+                        <span className="text-foreground/90 font-medium">{skill.name}</span>
+                        <span className="text-foreground/40 text-sm">{skill.level}%</span>
                       </div>
-                      <div className="h-2 w-full bg-gray-800 rounded-full overflow-hidden">
+                      <div className="h-2 w-full bg-foreground/10 rounded-full overflow-hidden">
                         <motion.div
                           initial={{ width: 0 }}
                           whileInView={{ width: `${skill.level}%` }}

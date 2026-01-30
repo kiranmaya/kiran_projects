@@ -98,7 +98,7 @@ export default function Contact({ personalInfo }: ContactProps) {
   })).filter(link => link.url);
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-b from-gray-900 to-black text-gray-100">
+    <section id="contact" className="py-20 bg-background text-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -107,10 +107,10 @@ export default function Contact({ personalInfo }: ContactProps) {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+          <h2 className="text-3xl sm:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
             Get In Touch
           </h2>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+          <p className="text-lg text-foreground/60 max-w-2xl mx-auto">
             I&apos;m always interested in AI collaborations, Next.js projects, or just a tech chat.
           </p>
         </motion.div>
@@ -126,10 +126,10 @@ export default function Contact({ personalInfo }: ContactProps) {
             {/* Contact Information */}
             <motion.div variants={itemVariants} className="space-y-8">
               <div>
-                <h3 className="text-2xl font-bold text-gray-100 mb-6">
+                <h3 className="text-2xl font-bold text-foreground mb-6">
                   Let&apos;s Connect
                 </h3>
-                <p className="text-gray-400 mb-8">
+                <p className="text-foreground/60 mb-8">
                   Whether you have an idea for an agentic workflow, a game concept, or a web platform,
                   I&apos;d love to hear from you.
                 </p>
@@ -139,16 +139,16 @@ export default function Contact({ personalInfo }: ContactProps) {
               <div className="space-y-6">
                 <motion.div
                   variants={itemVariants}
-                  className="flex items-center p-4 bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg shadow-sm hover:border-gray-500 transition-colors"
+                  className="flex items-center p-4 bg-foreground/5 backdrop-blur-sm border border-foreground/10 rounded-lg shadow-sm hover:border-primary/50 transition-colors"
                 >
-                  <div className="w-12 h-12 bg-blue-900/50 rounded-lg flex items-center justify-center mr-4">
-                    <EnvelopeIcon className="w-6 h-6 text-blue-400" />
+                  <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mr-4">
+                    <EnvelopeIcon className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <span className="font-medium text-gray-200">Email</span>
+                    <span className="font-medium text-foreground/80">Email</span>
                     <motion.a
                       href={`mailto:${personalInfo.email}`}
-                      className="text-gray-400 hover:text-blue-400 transition-colors duration-200 block mt-1"
+                      className="text-foreground/60 hover:text-primary transition-colors duration-200 block mt-1"
                       whileHover={{ x: 5 }}
                       transition={{ duration: 0.2 }}
                     >
@@ -159,16 +159,16 @@ export default function Contact({ personalInfo }: ContactProps) {
 
                 <motion.div
                   variants={itemVariants}
-                  className="flex items-center p-4 bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg shadow-sm hover:border-gray-500 transition-colors"
+                  className="flex items-center p-4 bg-foreground/5 backdrop-blur-sm border border-foreground/10 rounded-lg shadow-sm hover:border-secondary/50 transition-colors"
                 >
-                  <div className="w-12 h-12 bg-green-900/50 rounded-lg flex items-center justify-center mr-4">
-                    <PhoneIcon className="w-6 h-6 text-green-400" />
+                  <div className="w-12 h-12 bg-secondary/20 rounded-lg flex items-center justify-center mr-4">
+                    <PhoneIcon className="w-6 h-6 text-secondary" />
                   </div>
                   <div>
-                    <span className="font-medium text-gray-200">Phone</span>
+                    <span className="font-medium text-foreground/80">Phone</span>
                     <motion.a
                       href={`tel:${personalInfo.phone}`}
-                      className="text-gray-400 hover:text-green-400 transition-colors duration-200 block mt-1"
+                      className="text-foreground/60 hover:text-secondary transition-colors duration-200 block mt-1"
                       whileHover={{ x: 5 }}
                       transition={{ duration: 0.2 }}
                     >
@@ -179,15 +179,15 @@ export default function Contact({ personalInfo }: ContactProps) {
 
                 <motion.div
                   variants={itemVariants}
-                  className="flex items-center p-4 bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-lg shadow-sm hover:border-gray-500 transition-colors"
+                  className="flex items-center p-4 bg-foreground/5 backdrop-blur-sm border border-foreground/10 rounded-lg shadow-sm hover:border-accent/50 transition-colors"
                 >
-                  <div className="w-12 h-12 bg-purple-900/50 rounded-lg flex items-center justify-center mr-4">
-                    <MapPinIcon className="w-6 h-6 text-purple-400" />
+                  <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mr-4">
+                    <MapPinIcon className="w-6 h-6 text-accent" />
                   </div>
                   <div>
-                    <span className="font-medium text-gray-200">Location</span>
+                    <span className="font-medium text-foreground/80">Location</span>
                     <motion.p
-                      className="text-gray-400 mt-1"
+                      className="text-foreground/60 mt-1"
                       whileHover={{ x: 5 }}
                       transition={{ duration: 0.2 }}
                     >
@@ -199,7 +199,7 @@ export default function Contact({ personalInfo }: ContactProps) {
 
               {/* Social Links */}
               <motion.div variants={itemVariants}>
-                <h4 className="font-medium text-gray-200 mb-4">Follow Me</h4>
+                <h4 className="font-medium text-foreground/80 mb-4">Follow Me</h4>
                 <div className="flex space-x-4">
                   {socialLinksArray.map((link, index) => (
                     <motion.a
@@ -207,7 +207,7 @@ export default function Contact({ personalInfo }: ContactProps) {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-10 h-10 bg-gray-800 border border-gray-700 rounded-lg flex items-center justify-center text-gray-400 hover:bg-gray-700 hover:text-blue-400 hover:border-blue-400 transition-all duration-200"
+                      className="w-10 h-10 bg-foreground/5 border border-foreground/10 rounded-lg flex items-center justify-center text-foreground/60 hover:bg-foreground/10 hover:text-primary hover:border-primary transition-all duration-200"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -222,8 +222,8 @@ export default function Contact({ personalInfo }: ContactProps) {
 
             {/* Contact Form */}
             <motion.div variants={itemVariants}>
-              <div className="bg-gray-800/30 backdrop-blur-md border border-gray-700 rounded-xl shadow-xl p-8">
-                <h3 className="text-2xl font-bold text-gray-100 mb-6">
+              <div className="bg-foreground/5 backdrop-blur-md border border-foreground/10 rounded-xl shadow-xl p-8">
+                <h3 className="text-2xl font-bold text-foreground mb-6">
                   Send a Message
                 </h3>
 
@@ -236,11 +236,11 @@ export default function Contact({ personalInfo }: ContactProps) {
                       exit={{ opacity: 0, scale: 0.8 }}
                       className="text-center py-12"
                     >
-                      <CheckCircleIcon className="w-16 h-16 text-green-500 mx-auto mb-4" />
-                      <h4 className="text-xl font-semibold text-gray-100 mb-2">
+                      <CheckCircleIcon className="w-16 h-16 text-primary mx-auto mb-4" />
+                      <h4 className="text-xl font-semibold text-foreground mb-2">
                         Message Sent!
                       </h4>
-                      <p className="text-gray-400">
+                      <p className="text-foreground/60">
                         Thank you for reaching out. I&apos;ll get back to you soon!
                       </p>
                     </motion.div>
@@ -257,9 +257,9 @@ export default function Contact({ personalInfo }: ContactProps) {
                         <div>
                           <label
                             htmlFor="name"
-                            className="block text-sm font-medium text-gray-400 mb-2"
+                            className="block text-sm font-medium text-foreground/60 mb-2"
                           >
-                            Name <span className="text-blue-500">*</span>
+                            Name <span className="text-primary">*</span>
                           </label>
                           <input
                             type="text"
@@ -268,16 +268,16 @@ export default function Contact({ personalInfo }: ContactProps) {
                             value={formData.name}
                             onChange={handleInputChange}
                             required
-                            className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 placeholder-gray-600"
+                            className="w-full px-4 py-3 bg-background border border-foreground/10 rounded-lg text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 placeholder-foreground/20"
                             placeholder="Your name"
                           />
                         </div>
                         <div>
                           <label
                             htmlFor="email"
-                            className="block text-sm font-medium text-gray-400 mb-2"
+                            className="block text-sm font-medium text-foreground/60 mb-2"
                           >
-                            Email <span className="text-blue-500">*</span>
+                            Email <span className="text-primary">*</span>
                           </label>
                           <input
                             type="email"
@@ -286,7 +286,7 @@ export default function Contact({ personalInfo }: ContactProps) {
                             value={formData.email}
                             onChange={handleInputChange}
                             required
-                            className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 placeholder-gray-600"
+                            className="w-full px-4 py-3 bg-background border border-foreground/10 rounded-lg text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 placeholder-foreground/20"
                             placeholder="your.email@example.com"
                           />
                         </div>
@@ -295,9 +295,9 @@ export default function Contact({ personalInfo }: ContactProps) {
                       <div>
                         <label
                           htmlFor="subject"
-                          className="block text-sm font-medium text-gray-400 mb-2"
+                          className="block text-sm font-medium text-foreground/60 mb-2"
                         >
-                          Subject <span className="text-blue-500">*</span>
+                          Subject <span className="text-primary">*</span>
                         </label>
                         <input
                           type="text"
@@ -306,7 +306,7 @@ export default function Contact({ personalInfo }: ContactProps) {
                           value={formData.subject}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 placeholder-gray-600"
+                          className="w-full px-4 py-3 bg-background border border-foreground/10 rounded-lg text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 placeholder-foreground/20"
                           placeholder="Project Inquiry"
                         />
                       </div>
@@ -314,9 +314,9 @@ export default function Contact({ personalInfo }: ContactProps) {
                       <div>
                         <label
                           htmlFor="message"
-                          className="block text-sm font-medium text-gray-400 mb-2"
+                          className="block text-sm font-medium text-foreground/60 mb-2"
                         >
-                          Message <span className="text-blue-500">*</span>
+                          Message <span className="text-primary">*</span>
                         </label>
                         <textarea
                           id="message"
@@ -325,7 +325,7 @@ export default function Contact({ personalInfo }: ContactProps) {
                           onChange={handleInputChange}
                           required
                           rows={6}
-                          className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none placeholder-gray-600"
+                          className="w-full px-4 py-3 bg-background border border-foreground/10 rounded-lg text-foreground focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 resize-none placeholder-foreground/20"
                           placeholder="How can I help you?"
                         />
                       </div>
@@ -333,13 +333,13 @@ export default function Contact({ personalInfo }: ContactProps) {
                       <motion.button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                        className="w-full px-8 py-3 bg-gradient-to-r from-primary to-secondary text-background rounded-lg font-bold shadow-lg hover:opacity-90 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
                         {isSubmitting ? (
                           <>
-                            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2" />
+                            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-background mr-2" />
                             Sending...
                           </>
                         ) : (

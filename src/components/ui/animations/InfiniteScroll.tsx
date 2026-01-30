@@ -33,7 +33,7 @@ export default function InfiniteScroll({
           x: ['0%', '-33.33%', '-66.66%'],
           transition: {
             duration: speed,
-            ease: "linear",
+            ease: "linear" as const,
             repeat: Infinity
           }
         };
@@ -42,7 +42,7 @@ export default function InfiniteScroll({
           x: ['-33.33%', '-66.66%', '0%'],
           transition: {
             duration: speed,
-            ease: "linear",
+            ease: "linear" as const,
             repeat: Infinity
           }
         };
@@ -51,7 +51,7 @@ export default function InfiniteScroll({
           y: ['0%', '-33.33%', '-66.66%'],
           transition: {
             duration: speed,
-            ease: "linear",
+            ease: "linear" as const,
             repeat: Infinity
           }
         };
@@ -60,7 +60,7 @@ export default function InfiniteScroll({
           y: ['-33.33%', '-66.66%', '0%'],
           transition: {
             duration: speed,
-            ease: "linear",
+            ease: "linear" as const,
             repeat: Infinity
           }
         };
@@ -69,7 +69,7 @@ export default function InfiniteScroll({
           x: ['0%', '-33.33%', '-66.66%'],
           transition: {
             duration: speed,
-            ease: "linear",
+            ease: "linear" as const,
             repeat: Infinity
           }
         };

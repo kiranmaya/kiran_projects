@@ -12,7 +12,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const [currentTheme, setCurrentTheme] = useState<Theme>(
-        themes.find(t => t.id === 'prism') || themes[0]
+        themes.find(t => t.id === 'daisy') || themes[0]
     );
     const [mounted, setMounted] = useState(false);
 

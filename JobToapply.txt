@@ -1,0 +1,64 @@
+Job Alerts Link
+Job Description
+Apply now
+Software Lead
+Job Location (Short):  Hyderabad, India
+Workplace Type:  Hybrid
+Business Unit:  ALI
+Req Id:  2442
+Responsibilities
+Design and develop high-quality software solutions using ASP.NET Core, .NET 8, C#, REST API technologies.
+Architect, implement and maintain multi-tenant SaaS applications ensuring scalability, security, and performance.
+Develop and maintain JavaScript and Angular-based front-end applications integrated with backend services
+Design and implement SQL DB Schema that supports multi-tenant architecture.
+Collaborate with cross-functional teams to gather requirements, prioritize tasks, and deliver solutions that meet business needs.
+Optimize application performance and scalability through effective code design and implementation.
+Implement CI/CD pipelines using Azure DevOps, Docker, Kubernetes ensuring automated testing and deployment
+Ensure application security, scalability, and high availability on Azure App Service
+Monitor application health and performance using Azure Monitor, App Insights, and Azure Redis
+Participate in Agile methodologies, sprint planning, and retrospectives
+Collaborate with stakeholders in the Construction domain to understand business needs and translate them into technical solutions
+Follow the organizational process to achieve maintainable code by having good code coverage with unit tests, test automation, conducting code reviews and mentoring junior team members.
+Stay up-to-date with the latest trends and best practices in software engineering, multi-tenancy, and SaaS architecture.
+Education / Qualifications
+Bachelor’s/Master’s degree in Computer Science or a related technical field
+.NET Development: 8-12 years of deep expertise in ASP.NET Core, .NET 8, and C# including application of design patterns
+API & Microservices: Proven experience in developing RESTful APIs, ODATA services, and Microservices architectures.
+SaaS Architecture: Strong background in designing and implementing multi-tenant SaaS applications with a focus on data isolation and scalability.
+Database Management: Proficient in SQL Server, with hands-on experience in query optimization, indexing, and performance tuning.
+Frontend Development: Competent in JavaScript, Angular, HTML, and CSS for building responsive and user-friendly interfaces.
+Cloud & DevOps: Experienced with Azure DevOps, CI/CD pipelines, and deploying applications on Azure App Services.
+Containerization & Orchestration: Hands-on experience with Docker and Kubernetes for containerizing applications and managing deployments at scale.
+Monitoring & Caching: Familiar with Azure Redis Cache, Application Insights, and Azure Monitor for diagnostics and performance tracking.
+Quality Assurance: Strong advocate of unit testing, test automation, and code review best practices.
+Performance & Security: Focused on building secure, high-performance applications with attention to scalability and resilience.
+Collaboration & Communication: Excellent interpersonal and communication skills, with the ability to work effectively in agile teams and collaborate with global stakeholders.
+ 
+
+AI TECHNOLOGIES:
+
+Demonstrate a strong understanding of various AI models and their use cases, including classification, prediction, and generative models.
+Possess hands-on exposure to Large Language Models (LLMs) such as GPT, BERT, or similar, and their integration into enterprise applications (e.g., chatbots, search).
+Familiarity with AI Foundry platforms (e.g., Azure AI Studio, IBM Watsonx, AWS Bedrock) for model deployment and monitoring.
+Evaluate and implement prompt engineering strategies to optimize LLM performance in real-world scenarios.
+ 
+
+NICE TO HAVE:
+
+Experience in Jasmin, Karma and WebDriver IO
+Knowledge of Smart Construction, Smart Completions, and SDx2 products
+Familiarity with Crystal Reports and BI reporting tools
+About Hexagon
+Hexagon is the global leader in enterprise software, empowering organizations to build a safer, more sustainable and efficient future. We transform complex data into actionable insights that drive smarter decisions, modernize operations and accelerate digital maturity across industries that matter most — public safety, defense, transportation, government, industrial facilities and physical security.
+ 
+Hexagon (Nasdaq Stockholm: HEXA B) has approximately 24,800 employees in 50 countries and net sales of approximately 5.4bn EUR. Learn more at hexagon.com. 
+
+Why work for Hexagon?
+At Hexagon, if you can see it, you can do it. Hexagon puts their trust in you so that you can bring your ideas to life. We have emerged as one of the most engaged and enabled workplaces*. We are committed to creating an environment that is truly supportive by providing the resources you need to fully support your ambitions, no matter who you are or where you are in the world. 
+ 
+* In the recently concluded workplace effectiveness survey by Korn Ferry, a global HR advisory firm, Hexagon, has emerged as one of the most Engaged and Enabled workplaces, when compared to similar organizations that Korn Ferry partners with. 
+
+Everyone is welcome
+At Hexagon, we believe that diverse and inclusive teams are critical to the success of our people and our business. Everyone is welcome—as an inclusive workplace, we do not discriminate. In fact, we embrace differences and are fully committed to creating equal opportunities, an inclusive environment, and fairness for all. 
+ 
+Respect is the cornerstone of how we operate, so speak up and be yourself. You are valued here. 

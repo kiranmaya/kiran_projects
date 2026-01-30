@@ -1,14 +1,22 @@
-// Personal Information Types
 export interface PersonalInfo {
   name: string;
   title: string;
   email: string;
   phone: string;
   location: string;
-  bio: string;
-  avatar: string;
-  socialLinks: SocialLink[];
+  about: string; // Changed from bio
+  bio?: string; // Optional for backward compat
+  avatar?: string;
+  socialLinks: SocialLinks;
 }
+
+export interface SocialLinks {
+  linkedin?: string;
+  github?: string;
+  twitter?: string;
+  [key: string]: string | undefined;
+}
+
 
 export interface SocialLink {
   platform: string;
@@ -18,27 +26,28 @@ export interface SocialLink {
 
 // Skills Types
 export interface Skill {
-  id: string;
+  id?: string;
   name: string;
   category: SkillCategory;
-  level: SkillLevel;
+  level: number; // Changed to number for progress bars
   icon?: string;
 }
 
-export type SkillCategory = 'frontend' | 'backend' | 'database' | 'tools' | 'design' | 'other';
-export type SkillLevel = 'beginner' | 'intermediate' | 'advanced' | 'expert';
+export type SkillCategory = 'ai' | 'web' | 'game' | 'tool' | 'frontend' | 'backend' | 'database' | 'design' | 'other';
+export type SkillLevel = 'beginner' | 'intermediate' | 'advanced' | 'expert'; // Kept for backward compat if needed, but main usage will be number
 
 // Experience Types
 export interface Experience {
   id: string;
   company: string;
-  position: string;
+  role: string; // Changed from position to role
   startDate: string;
   endDate?: string;
-  current: boolean;
+  current?: boolean;
   description: string;
-  technologies: string[];
+  technologies?: string[];
   achievements: string[];
+  location?: string;
 }
 
 // Project Types
@@ -61,7 +70,7 @@ export interface Project {
   highlights: string[];
 }
 
-export type ProjectCategory = 'web' | 'game' | 'mobile' | 'desktop' | 'other';
+export type ProjectCategory = 'ai' | 'web' | 'game' | 'tool' | 'mobile' | 'desktop' | 'other';
 export type ProjectStatus = 'completed' | 'in-progress' | 'planned';
 
 // Contact Types

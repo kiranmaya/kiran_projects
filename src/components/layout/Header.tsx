@@ -12,6 +12,8 @@ import {
   UserIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
+import ThemeSelector from '../common/ThemeSelector';
+
 // Simple utility function for combining class names
 const cn = (...classes: (string | undefined | null | false)[]) => {
   return classes.filter(Boolean).join(' ');
@@ -26,10 +28,9 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { id: 'home', label: 'Home', href: '#home', icon: HomeIcon },
-  { id: 'about', label: 'About', href: '#about', icon: UserIcon },
   { id: 'skills', label: 'Skills', href: '#skills', icon: CodeBracketIcon },
-  { id: 'experience', label: 'Experience', href: '#experience', icon: BriefcaseIcon },
   { id: 'portfolio', label: 'Portfolio', href: '#portfolio', icon: CodeBracketIcon },
+  { id: 'experience', label: 'Experience', href: '#experience', icon: BriefcaseIcon },
   { id: 'contact', label: 'Contact', href: '#contact', icon: EnvelopeIcon },
 ];
 
@@ -40,19 +41,9 @@ export default function Header() {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  /**
-   * Smooth-scroll to an in-page anchor.
-   * If the target element isn't found (likely because we're on a different route),
-   * navigate to the home route first and then attempt to scroll.
-   */
   const scrollToSection = async (href: string) => {
-    // Normalize selector (ensure it starts with '#')
     const selector = href.startsWith('#') ? href : `#${href}`;
-    // Try to find element on current page
     const element = document.querySelector(selector);
-    // Debug log to validate behavior at runtime
-    // eslint-disable-next-line no-console
-    console.log('Header.scrollToSection', selector, !!element, 'pathname=', pathname);
 
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -60,33 +51,26 @@ export default function Header() {
       return;
     }
 
-    // If not on root, navigate to root first and then scroll
     if (pathname !== '/') {
       try {
         await router.push('/');
-        // Give browser a tick to render the home content before querying
         setTimeout(() => {
           const el = document.querySelector(selector);
-          // eslint-disable-next-line no-console
-          console.log('Header.postNavScroll', selector, !!el);
           if (el) {
             el.scrollIntoView({ behavior: 'smooth' });
           }
           setIsMenuOpen(false);
-        }, 120);
+        }, 300); // Increased timeout slightly for reliability
       } catch (err) {
-        // eslint-disable-next-line no-console
-        console.error('Navigation to home failed before scrolling to', selector, err);
         setIsMenuOpen(false);
       }
     } else {
-      // Element wasn't found but we're on home — simply close menu
       setIsMenuOpen(false);
     }
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-foreground/10">
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -94,13 +78,16 @@ export default function Header() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex-shrink-0"
+            className="flex-shrink-0 cursor-pointer"
+            onClick={() => scrollToSection('#home')}
           >
-            <h1 className="text-xl font-bold text-gray-900">Portfolio</h1>
+            <h1 className="text-xl font-bold text-foreground tracking-widest uppercase">
+              Kiran<span className="text-primary">.Dev</span>
+            </h1>
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center space-x-4">
             <div className="ml-10 flex items-baseline space-x-4">
               {navItems.map((item, index) => {
                 const Icon = item.icon;
@@ -112,9 +99,9 @@ export default function Header() {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     onClick={() => scrollToSection(item.href)}
                     className={cn(
-                      'flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200',
-                      'text-gray-700 hover:text-blue-600 hover:bg-blue-50',
-                      'focus:outline-none focus:text-blue-600 focus:bg-blue-50'
+                      'flex items-center px-3 py-2 rounded-md text-sm font-medium transition-all duration-200',
+                      'text-foreground/70 hover:text-primary hover:bg-foreground/5',
+                      'focus:outline-none focus:text-primary focus:bg-foreground/5'
                     )}
                   >
                     <Icon className="w-4 h-4 mr-2" />
@@ -123,16 +110,19 @@ export default function Header() {
                 );
               })}
             </div>
+            <div className="h-6 w-px bg-foreground/10 mx-2" />
+            <ThemeSelector />
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-4">
+            <ThemeSelector />
             <motion.button
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
               onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+              className="inline-flex items-center justify-center p-2 rounded-md text-foreground/70 hover:text-foreground hover:bg-foreground/5 focus:outline-none"
             >
               {isMenuOpen ? (
                 <XMarkIcon className="block h-6 w-6" />
@@ -151,9 +141,9 @@ export default function Header() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden"
+              className="md:hidden bg-background border-t border-foreground/10"
             >
-              <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
+              <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 {navItems.map((item, index) => {
                   const Icon = item.icon;
                   return (
@@ -165,8 +155,8 @@ export default function Header() {
                       onClick={() => scrollToSection(item.href)}
                       className={cn(
                         'flex items-center w-full px-3 py-2 rounded-md text-base font-medium transition-colors duration-200',
-                        'text-gray-700 hover:text-blue-600 hover:bg-blue-50',
-                        'focus:outline-none focus:text-blue-600 focus:bg-blue-50'
+                        'text-foreground/70 hover:text-primary hover:bg-foreground/5',
+                        'focus:outline-none focus:text-primary focus:bg-foreground/5'
                       )}
                     >
                       <Icon className="w-5 h-5 mr-3" />

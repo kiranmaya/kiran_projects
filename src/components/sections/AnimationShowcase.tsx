@@ -6,7 +6,6 @@ interface Effect {
   name: string;
   element: React.ReactElement;
 }
-
 type CategoryType = 'text' | 'div' | 'advanced';
 
 const AnimationShowcase = () => {
@@ -455,17 +454,17 @@ const AnimationShowcase = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 p-8">
+    <div className="min-h-screen bg-background p-8">
       {/* Header */}
       <div className="text-center mb-12">
         <motion.h1
-          className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-600 mb-4"
+          className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-4"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
         >
           Animation Effects Library
         </motion.h1>
-        <p className="text-gray-400 text-lg">Comprehensive collection of React + Framer Motion animations</p>
+        <p className="text-foreground/60 text-lg">Comprehensive collection of React + Framer Motion animations</p>
       </div>
 
       {/* Category Selector */}
@@ -474,11 +473,10 @@ const AnimationShowcase = () => {
           <motion.button
             key={category}
             onClick={() => setActiveCategory(category)}
-            className={`px-8 py-3 rounded-full font-bold uppercase tracking-wider transition-all ${
-              activeCategory === category
-                ? 'bg-gradient-to-r from-cyan-500 to-purple-600 text-white'
-                : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
-            }`}
+            className={`px-8 py-3 rounded-full font-bold uppercase tracking-wider transition-all ${activeCategory === category
+              ? 'bg-gradient-to-r from-primary to-secondary text-background shadow-lg shadow-primary/20'
+              : 'bg-foreground/5 text-foreground/60 hover:bg-foreground/10'
+              }`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -491,7 +489,7 @@ const AnimationShowcase = () => {
       <div className="flex justify-center mb-8">
         <motion.button
           onClick={() => setTriggerAnimation(prev => prev + 1)}
-          className="px-6 py-3 bg-gradient-to-r from-green-500 to-teal-500 text-white rounded-full font-bold"
+          className="px-6 py-3 bg-gradient-to-r from-primary to-secondary text-background rounded-full font-bold shadow-lg shadow-primary/20"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
@@ -509,9 +507,9 @@ const AnimationShowcase = () => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ delay: index * 0.05 }}
-              className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700 hover:border-cyan-500 transition-all"
+              className="bg-foreground/5 backdrop-blur-sm rounded-xl p-6 border border-foreground/10 hover:border-primary/50 transition-all"
             >
-              <h3 className="text-cyan-400 font-bold mb-4 text-center">{effect.name}</h3>
+              <h3 className="text-primary font-bold mb-4 text-center">{effect.name}</h3>
               <div className="flex items-center justify-center min-h-[150px]">
                 {effect.element}
               </div>
@@ -532,14 +530,14 @@ const ScrambleText = ({ text }: { text: string }) => {
     let iteration = 0;
     const interval = setInterval(() => {
       setScrambled(text.split('').map((char, index) => {
-        if(index < iteration) return text[index];
+        if (index < iteration) return text[index];
         return chars[Math.floor(Math.random() * chars.length)];
       }).join(''));
 
-      if(iteration >= text.length) {
+      if (iteration >= text.length) {
         clearInterval(interval);
       }
-      iteration += 1/3;
+      iteration += 1 / 3;
     }, 30);
 
     return () => clearInterval(interval);

@@ -94,7 +94,7 @@ export const projects: Project[] = [
     longDescription: "A sleek, mobile-optimized news aggregation website using Vercel's v0.app platform. Delivers concise, real-time updates on NSE F&O markets.",
     technologies: ["React", "Tailwind CSS", "Vercel", "MongoDB"],
     category: "web",
-    image: "/images/shortnews.jpg",
+    image: "/images/short_news.jpg",
     status: "completed",
     startDate: "2023-06-01",
     featured: true,

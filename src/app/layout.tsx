@@ -14,10 +14,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Bheemanadham Kiran Kumar - Senior Game Developer & Unity3D Expert",
+    default: "Bheemanadham Kiran Kumar - Senior  Developer & Unity3D Expert",
     template: "%s | Bheemanadham Kiran Kumar"
   },
-  description: "Portfolio of Bheemanadham Kiran Kumar - Senior Game Developer with 13+ years of experience. Developed 60+ games for Android/iOS platforms using Unity3D and Unreal Engine. Unity Asset Store publisher and game development expert.",
+  description: "Portfolio of Bheemanadham Kiran Kumar - Senior  Developer with 13+ years of experience. Developed 60+ games for Android/iOS platforms using Unity3D and Unreal Engine. Unity Asset Store publisher and game development expert.",
   keywords: [
     "Bheemanadham Kiran Kumar",
     "Game Developer",
@@ -48,22 +48,22 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://kiran-kumar-portfolio.vercel.app",
-    title: "Bheemanadham Kiran Kumar - Senior Game Developer & Unity3D Expert",
-    description: "Portfolio of Bheemanadham Kiran Kumar - Senior Game Developer with 13+ years of experience. Developed 60+ games for Android/iOS platforms using Unity3D and Unreal Engine.",
+    title: "Bheemanadham Kiran Kumar - Senior  Developer & Unity3D Expert",
+    description: "Portfolio of Bheemanadham Kiran Kumar - Senior  Developer with 13+ years of experience. Developed 60+ games for Android/iOS platforms using Unity3D and Unreal Engine.",
     siteName: "Bheemanadham Kiran Kumar Portfolio",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Bheemanadham Kiran Kumar - Senior Game Developer & Unity3D Expert",
+        alt: "Bheemanadham Kiran Kumar - Senior  Developer & Unity3D Expert",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bheemanadham Kiran Kumar - Senior Game Developer & Unity3D Expert",
-    description: "Portfolio of Bheemanadham Kiran Kumar - Senior Game Developer with 13+ years of experience. Developed 60+ games for Android/iOS platforms.",
+    title: "Bheemanadham Kiran Kumar - Senior  Developer & Unity3D Expert",
+    description: "Portfolio of Bheemanadham Kiran Kumar - Senior  Developer with 13+ years of experience. Developed 60+ games for Android/iOS platforms.",
     images: ["/og-image.jpg"],
     creator: "@kirankillstreak",
   },
